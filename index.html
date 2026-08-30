@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="O'Turkish Kebab, 28 rue François Mauriac, Marseille 10e. Sandwiches, tacos, burgers, tex mex et box à emporter ou en livraison.">
+  <title>O'Turkish Kebab | Marseille 10e</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%23111%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23fff%22>🥙</text></svg>">
+  <style>
+    :root{--black:#111;--white:#fff;--grey:#666;--light-grey:#888;--line:#e5e5e5;--bg:#fafafa}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--white);color:var(--black);font:16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:600;letter-spacing:-.02em}
+    .wrap{width:min(1060px,calc(100% - 32px));margin:auto}@media(min-width:768px){.wrap{width:min(1060px,calc(100% - 48px))}}
+    .notice{text-align:center;padding:9px 12px;background:var(--black);color:var(--white);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}@media(min-width:768px){.notice{padding:10px 16px;font-size:11px}}
+    header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;min-height:58px;gap:12px;flex-wrap:nowrap}@media(min-width:768px){.nav{min-height:64px;gap:24px}}
+    .brand{flex-shrink:0;display:flex;align-items:center;gap:10px;font-size:15px;font-weight:700;letter-spacing:-.01em;line-height:1}.brand small{display:block;margin-top:3px;color:var(--light-grey);font-size:9px;font-weight:400;letter-spacing:.14em;text-transform:uppercase}
+    .navlinks{display:none;gap:20px;color:var(--grey);font-size:13px;align-items:center}@media(min-width:900px){.navlinks{display:flex;gap:26px}}.navlinks a{transition:color 150ms ease;white-space:nowrap;padding:6px 0}.navlinks a:hover{color:var(--black)}
+    .nav-actions{display:flex;align-items:center;gap:8px;flex-shrink:0}@media(min-width:768px){.nav-actions{gap:12px}}
+    .call{display:none;padding:9px 14px;border:1px solid var(--black);border-radius:2px;background:var(--black);color:var(--white);font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:all 150ms ease;white-space:nowrap}@media(min-width:900px){.call{display:inline-flex;align-items:center;justify-content:center}}@media(min-width:1100px){.call{padding:9px 16px;font-size:12px}}.call:hover{background:var(--white);color:var(--black)}
+    .toggle{display:inline-grid;place-items:center;width:40px;height:40px;border:1px solid transparent;border-radius:2px;background:none;font-size:20px;line-height:1;cursor:pointer;transition:border-color 150ms ease,background 150ms ease;flex-shrink:0}@media(min-width:900px){.toggle{display:none}}.toggle:hover{border-color:var(--line);background:var(--bg)}.toggle:active{background:var(--line)}
+    .hero{padding:48px 0 44px;border-bottom:1px solid var(--line)}@media(min-width:600px){.hero{padding:72px 0 60px}}@media(min-width:768px){.hero{padding:90px 0 78px}}@media(min-width:1024px){.hero{padding:110px 0 90px}}
+    .eyebrow{color:var(--light-grey);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;line-height:1.5}@media(min-width:768px){.eyebrow{font-size:11px}}
+    .hero h1{max-width:640px;margin-top:16px;font-size:clamp(1.9rem,8vw,4.2rem);line-height:1.05;letter-spacing:-.03em}@media(min-width:768px){.hero h1{margin-top:22px}}
+    .lead{max-width:520px;margin-top:16px;color:var(--grey);font-size:15px;line-height:1.6}@media(min-width:768px){.lead{margin-top:24px;font-size:16px;line-height:1.65}}
+    .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}@media(min-width:768px){.actions{gap:12px;margin-top:36px}}
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border:1px solid var(--black);border-radius:2px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all 150ms ease;white-space:nowrap;touch-action:manipulation}@media(min-width:768px){.btn{min-height:46px;padding:0 24px}}.btn.primary{background:var(--black);color:var(--white)}.btn.primary:hover{background:var(--white);color:var(--black)}.btn.primary:active{transform:scale(.98)}.btn.outline{background:transparent;color:var(--black)}.btn.outline:hover{background:var(--black);color:var(--white)}
+    .availability{margin-top:20px;color:var(--light-grey);font-size:12px;letter-spacing:.04em;line-height:1.5}@media(min-width:768px){.availability{margin-top:28px}}.availability strong{color:var(--black);font-weight:600}
+    section{padding:48px 0}@media(min-width:600px){section{padding:60px 0}}@media(min-width:768px){section{padding:72px 0}}@media(min-width:1024px){section{padding:90px 0}}
+    .head{margin-bottom:32px}@media(min-width:768px){.head{margin-bottom:44px}}.kicker{color:var(--light-grey);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}@media(min-width:768px){.kicker{font-size:11px}}.head h2{margin-top:10px;font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.1;letter-spacing:-.02em}@media(min-width:768px){.head h2{margin-top:12px}}.intro{max-width:440px;margin-top:10px;color:var(--grey);font-size:13px;line-height:1.6}@media(min-width:768px){.intro{margin-top:14px;font-size:14px}}
+    .tabs{display:flex;gap:18px;border-bottom:1px solid var(--line);margin-bottom:8px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:none;flex-wrap:nowrap;padding-bottom:1px}.tabs::-webkit-scrollbar{display:none}@media(min-width:768px){.tabs{gap:24px;overflow:visible;flex-wrap:wrap}}
+    .tab{position:relative;flex:0 0 auto;border:0;background:none;color:var(--light-grey);padding:0 0 14px;cursor:pointer;font-size:12.5px;font-weight:500;letter-spacing:.04em;text-transform:uppercase;transition:color 150ms ease;white-space:nowrap;touch-action:manipulation;min-height:44px;display:inline-flex;align-items:center}@media(min-width:768px){.tab{font-size:13px;min-height:auto}}.tab:hover,.tab[aria-selected=true]{color:var(--black)}.tab[aria-selected=true]:after{content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--black)}@media(min-width:768px){.tab[aria-selected=true]:after{height:1px}}
+    .menu{display:grid;grid-template-columns:1fr;gap:0}@media(min-width:640px){.menu{grid-template-columns:1fr 1fr;column-gap:32px}}@media(min-width:1024px){.menu{column-gap:48px}}@media(min-width:1100px){.menu{column-gap:56px}}
+    .item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:14px 0;border-bottom:1px solid var(--line)}@media(min-width:600px){.item{gap:18px;padding:18px 0}}.item h3{font-size:14px;font-weight:600;line-height:1.3}@media(min-width:768px){.item h3{font-size:15px}}.item p{margin-top:3px;color:var(--grey);font-size:12.5px;line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}@media(min-width:768px){.item p{margin-top:4px;font-size:13px;-webkit-line-clamp:unset;overflow:visible}}.price{font-size:13px;font-weight:600;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums;flex-shrink:0}@media(min-width:768px){.price{font-size:14px}}.price small{display:block;margin-top:2px;color:var(--light-grey);font-size:10.5px;font-weight:400}@media(min-width:768px){.price small{font-size:11px}}
+    .item.has-thumb{grid-template-columns:64px 1fr auto;gap:10px}@media(min-width:400px){.item.has-thumb{grid-template-columns:72px 1fr auto;gap:12px}}@media(min-width:600px){.item.has-thumb{grid-template-columns:92px 1fr auto;gap:18px}}
+    .item-thumb{width:64px;height:48px;object-fit:cover;border-radius:4px;border:1px solid var(--line);background:var(--bg);display:block}@media(min-width:400px){.item-thumb{width:72px;height:54px}}@media(min-width:600px){.item-thumb{width:92px;height:68px}}
+    .feature{background:var(--bg);border-block:1px solid var(--line)}.feature-layout{display:grid;grid-template-columns:1fr;gap:28px}@media(min-width:768px){.feature-layout{gap:36px}}@media(min-width:900px){.feature-layout{grid-template-columns:.85fr 1.15fr;gap:48px}}@media(min-width:1100px){.feature-layout{grid-template-columns:.8fr 1.2fr;gap:64px}}
+    .feature-copy{max-width:60ch;color:var(--grey);font-size:15px;line-height:1.65}@media(min-width:768px){.feature-copy{font-size:17px}}.feature-copy p+p{margin-top:16px}@media(min-width:768px){.feature-copy p+p{margin-top:20px}}
+    .facts{display:grid;grid-template-columns:1fr;gap:20px;margin-top:32px}@media(min-width:500px){.facts{grid-template-columns:repeat(2,1fr);gap:24px}}@media(min-width:768px){.facts{gap:32px;margin-top:48px}}
+    .fact{border-left:2px solid var(--black);padding-left:14px}@media(min-width:768px){.fact{padding-left:18px;border-left-width:1px}}.fact strong{display:block;font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;line-height:1.3}@media(min-width:768px){.fact strong{font-size:11px}}.fact span{display:block;margin-top:6px;color:var(--grey);font-size:12.5px;line-height:1.55}@media(min-width:768px){.fact span{margin-top:8px;font-size:13px}}
+    .visit-card{padding:22px;border:1px solid var(--line);background:var(--white);border-radius:2px}@media(min-width:600px){.visit-card{padding:28px}}@media(min-width:768px){.visit-card{padding:36px}}
+    .visit-card h3{font-size:19px}@media(min-width:768px){.visit-card h3{font-size:22px}}.visit-card>p{margin-top:8px;color:var(--grey);font-size:14px;line-height:1.5}@media(min-width:768px){.visit-card>p{margin-top:10px}}
+    .contact-grid{display:grid;grid-template-columns:1fr;gap:0;margin-top:20px}@media(min-width:520px){.contact-grid{grid-template-columns:1fr 1fr;gap:0 20px}}@media(min-width:768px){.contact-grid{gap:0 24px;margin-top:30px}}
+    .contact{padding:12px 0;border-top:1px solid var(--line)}@media(min-width:768px){.contact{padding:14px 0}}.contact label{display:block;color:var(--light-grey);font-size:9.5px;font-weight:500;letter-spacing:.14em;text-transform:uppercase}@media(min-width:768px){.contact label{font-size:10px}}.contact strong{display:block;margin-top:4px;font-size:13px;font-weight:500;letter-spacing:-.01em}@media(min-width:768px){.contact strong{margin-top:5px;font-size:14px}}
+    .phones{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}@media(min-width:768px){.phones{gap:10px;margin-top:26px}}.phone{display:inline-flex;align-items:center;justify-content:center;min-height:42px;padding:0 14px;border:1px solid var(--black);border-radius:2px;font-size:12.5px;font-weight:600;transition:all 150ms ease;flex:1 1 auto;min-width:calc(50% - 4px);text-align:center}@media(min-width:480px){.phone{flex:0 1 auto;min-width:auto}}@media(min-width:768px){.phone{min-height:40px;padding:0 16px;font-size:13px}}.phone:hover{background:var(--black);color:var(--white)}
+    .price{display:flex;flex-direction:column;align-items:flex-end;gap:2px}.add{display:inline-grid;place-items:center;width:28px;height:28px;margin-bottom:3px;border:1px solid var(--black);border-radius:2px;background:none;font-size:16px;line-height:1;cursor:pointer;transition:all 150ms ease;touch-action:manipulation}@media(min-width:768px){.add{width:26px;height:26px;margin-bottom:4px}}.add:hover{background:var(--black);color:var(--white)}.add:active{transform:scale(.92)}.add.pulse{animation:pulse 350ms ease}.badge.bump{animation:bump 300ms ease}@keyframes pulse{0%{transform:scale(1)}40%{transform:scale(1.25);background:var(--black);color:var(--white)}100%{transform:scale(1)}}@keyframes bump{0%{transform:scale(1)}50%{transform:scale(1.4)}100%{transform:scale(1)}}
+    .cart-toggle{position:relative;display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:2px;background:none;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:border-color 150ms ease,background 150ms ease;white-space:nowrap;min-height:40px;touch-action:manipulation}@media(min-width:768px){.cart-toggle{gap:8px;padding:9px 14px;font-size:12px}}.cart-toggle:hover{border-color:var(--black);background:var(--bg)}
+    .badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:var(--black);color:var(--white);font-size:10px;font-weight:700;line-height:1}@media(min-width:768px){.badge{min-width:17px;height:17px}}
+    .backdrop{position:fixed;inset:0;z-index:30;background:rgba(17,17,17,.45);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity 200ms ease}.backdrop.show{opacity:1;pointer-events:auto}
+    .drawer{position:fixed;top:0;right:0;bottom:0;z-index:31;width:min(420px,100%);max-width:100vw;background:var(--white);border-left:1px solid var(--line);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 260ms cubic-bezier(.32,.72,0,1)}.drawer.open{transform:none}
+    .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px;border-bottom:1px solid var(--line);min-height:56px}@media(min-width:768px){.drawer-head{padding:20px 22px}}.drawer-head strong{font-size:14px}.x-btn{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:var(--grey);padding:6px;width:40px;height:40px;display:grid;place-items:center;border-radius:2px;transition:color 150ms ease,background 150ms ease}.x-btn:hover{color:var(--black);background:var(--bg)}
+    .drawer-body{flex:1;overflow:auto;padding:4px 16px}@media(min-width:768px){.drawer-body{padding:6px 22px}}.ditem{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}@media(min-width:768px){.ditem{gap:14px;padding:14px 0}}.ditem strong{font-size:13px;font-weight:600}@media(min-width:768px){.ditem strong{font-size:14px}}.ditem .unit{display:block;margin-top:4px;color:var(--light-grey);font-size:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+    .mini{width:28px;height:28px;border:1px solid var(--line);border-radius:2px;background:none;cursor:pointer;line-height:1;font-size:13px;display:inline-grid;place-items:center;transition:border-color 150ms ease,background 150ms ease;touch-action:manipulation}@media(min-width:768px){.mini{width:22px;height:22px}}.mini:hover{border-color:var(--black)}.mini:active{background:var(--black);color:var(--white)}
+    .empty{color:var(--light-grey);font-size:13px;text-align:center;padding:32px 0}.drawer-foot{padding:16px;border-top:1px solid var(--line);background:var(--white)}@media(min-width:768px){.drawer-foot{padding:20px 22px}}.total{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:600;margin-bottom:12px}@media(min-width:768px){.total{margin-bottom:14px}}.pay{width:100%;min-height:46px}.pay:disabled{opacity:.35;cursor:not-allowed}.note{margin-top:10px;color:var(--light-grey);font-size:11px;text-align:center;line-height:1.5}
+    footer{padding:24px 0;border-top:1px solid var(--line)}@media(min-width:768px){footer{padding:34px 0}}.footer{display:flex;flex-direction:column;gap:12px;color:var(--light-grey);font-size:11px;line-height:1.5}@media(min-width:600px){.footer{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;font-size:12px}}.footer strong{color:var(--black)}.fine{max-width:58ch;order:2}@media(min-width:600px){.fine{order:0}}
+    @media(max-width:899px){
+      .navlinks{
+        display:flex;position:fixed;left:0;right:0;top:58px;flex-direction:column;gap:0;padding:8px 16px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.98);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);
+        transform:translateY(-8px);opacity:0;pointer-events:none;transition:transform 200ms ease,opacity 200ms ease;box-shadow:0 8px 24px rgba(0,0,0,.06);
+        max-height:calc(100vh - 58px);overflow:auto;
+      }
+      @media(min-width:768px){.navlinks{top:64px;max-height:calc(100vh - 64px);padding:8px 24px 20px}}
+      .navlinks.open{transform:none;opacity:1;pointer-events:auto}
+      .navlinks a{padding:14px 4px;border-bottom:1px solid var(--line);font-size:14px;color:var(--black);min-height:48px;display:flex;align-items:center}
+      .navlinks a:last-child{border:0}
+      .navlinks a:hover{color:var(--grey)}
+    }
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition-duration:.01ms!important;animation-duration:.01ms!important}
+
+  </style>
+</head>
+<body>
+  <div class="notice">ouvert 7j/7 · 11h à minuit · livraison à partir de 15€</div>
+  <header><div class="wrap nav"><a class="brand" href="#accueil" aria-label="O'Turkish Kebab"><span>O'Turkish<small>Kebab · Marseille 10e</small></span></a><nav class="navlinks" id="navlinks"><a href="#menu">La carte</a><a href="#maison">L’esprit maison</a><a href="#venir">Nous trouver</a></nav><div class="nav-actions"><a class="call" href="tel:0769715620">Commander ↗</a><button class="cart-toggle" id="cartToggle" aria-label="Ouvrir le panier">Panier <span class="badge" id="cartCount">0</span></button><button class="toggle" id="toggle" aria-label="Ouvrir la navigation" aria-expanded="false">☰</button></div></div></header>
+  <main id="accueil">
+    <section class="wrap hero"><div class="eyebrow">street food · grillades · Marseille 10e</div><h1>Le kebab qui met tout le monde d’accord.</h1><p class="lead">Chez O'Turkish, on vient pour un sandwich bien chargé, on reste pour les frites. Kebab, tacos, burgers, tex mex et box à partager, servis sur place, à emporter ou en livraison.</p><div class="actions"><a class="btn primary" href="#menu">Voir la carte ↗</a><a class="btn outline" href="tel:0769715620">Appeler maintenant</a></div><div class="availability"><strong>Ouvert tous les jours</strong>, de 11h à minuit</div></section>
+    <section id="menu" class="wrap"><div class="head"><div class="kicker">01 · La carte</div><h2>Choisis ton terrain de jeu.</h2><p class="intro">Les menus incluent frites et boisson quand indiqué.</p></div><div class="tabs" role="tablist" aria-label="Catégories du menu"><button class="tab" role="tab" aria-selected="true" data-cat="sandwiches">Sandwiches</button><button class="tab" role="tab" aria-selected="false" data-cat="tacos">Tacos</button><button class="tab" role="tab" aria-selected="false" data-cat="burgers">Burgers</button><button class="tab" role="tab" aria-selected="false" data-cat="texmex">Tex Mex</button><button class="tab" role="tab" aria-selected="false" data-cat="extras">Extras</button><button class="tab" role="tab" aria-selected="false" data-cat="boissons">Boissons</button></div><div class="menu" id="menuGrid"></div></section>
+    <section id="maison" class="feature"><div class="wrap feature-layout"><div><div class="kicker">02 · L’esprit maison</div><h2 style="margin-top:12px;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.1">Simple, généreux,<br>sans détour.</h2></div><div><div class="feature-copy"><p>O'Turkish, c’est l’adresse du 10e pour manger vite sans manger triste. Une carte large, des portions généreuses et les classiques qui font le job, du kebab au tacos triple viande.</p><p>À midi, après le travail ou quand la faim frappe fort, tu sais où aller.</p></div><div class="facts"><div class="fact"><strong>01 · À toute heure</strong><span>Ouvert 7 jours sur 7, de 11h à minuit.</span></div><div class="fact"><strong>02 · Pour chacun</strong><span>Sandwiches, burgers, tacos, pâtes, salades et box.</span></div><div class="fact"><strong>03 · À partager</strong><span>Box étudiant et Box Family pour les grosses faims.</span></div><div class="fact"><strong>04 · En livraison</strong><span>Livraison à partir de 15€, selon zone.</span></div></div></div></div></section>
+    <section id="venir" class="wrap"><div class="head"><div class="kicker">03 · En pratique</div><h2>Rendez-vous à la Capelette.</h2></div><div class="visit-card"><h3>O'Turkish Kebab</h3><p>28 rue François Mauriac<br>13010 Marseille</p><div class="contact-grid"><div class="contact"><label>Horaires</label><strong>7j/7 · 11h à minuit</strong></div><div class="contact"><label>Services</label><strong>Sur place · À emporter</strong></div><div class="contact"><label>Livraison</label><strong>À partir de 15€</strong></div><div class="contact"><label>Commande</label><strong>Par téléphone</strong></div></div><div class="phones"><a class="phone" href="tel:0769715620">07 69 71 56 20</a><a class="phone" href="tel:0988353908">09 88 35 39 08</a><a class="phone" href="https://www.google.com/maps/search/?api=1&query=28+rue+Fran%C3%A7ois+Mauriac%2C+13010+Marseille" target="_blank" rel="noopener">Itinéraire ↗</a></div></div></section>
+  </main>
+  <footer><div class="wrap footer"><strong>O'Turkish Kebab</strong><div class="fine">28 rue François Mauriac, 13010 Marseille · 7j/7 · 11h–00h</div><span>Marseille</span></div></footer>
+  <div class="backdrop" id="backdrop"></div>
+  <aside class="drawer" id="drawer" aria-label="Panier">
+    <div class="drawer-head"><strong>Votre panier</strong><button class="x-btn" id="closeCart" aria-label="Fermer le panier">×</button></div>
+    <div class="drawer-body" id="cartBody"></div>
+    <div class="drawer-foot">
+      <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
+      <button class="btn primary pay" id="payBtn" disabled>Payer en ligne</button>
+      <a class="btn outline" href="tel:0769715620" style="width:100%;margin-top:10px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Commander par téléphone</a>
+      <p class="note" id="payNote">Paiement sécurisé par Stripe · à emporter ou en livraison</p>
+    </div>
+  </aside>
+  <script>
+    // ===== CONFIGURATION STRIPE (à faire une seule fois) =====
+    // 1) Créez un compte gratuit sur https://stripe.com
+    // 2) Dashboard > Produits > créez chaque article avec son prix,
+    //    puis « Lien de paiement » : copiez l'URL (https://buy.stripe.com/...)
+    // 3) Collez les liens ci-dessous, ex. :
+    //    const STRIPE_LINKS={ 'Kebab':'https://buy.stripe.com/xxxx', 'Tacos Simple':'https://buy.stripe.com/yyyy' };
+    // Un article sans lien restera commandable par téléphone uniquement.
+    const STRIPE_LINKS={};
+    const data={
+      sandwiches:[['Kebab','Pain, viande kebab, crudités, sauce au choix.','6,00 €','8,00 € menu'],['Steak frites','Steak, frites, sauce au choix.','5,50 €','7,50 € menu'],['Tenders','Tenders, crudités, sauce au choix.','5,50 €','7,50 € menu'],['Cordon bleu','Cordon bleu, crudités, sauce au choix.','5,50 €','7,50 € menu'],['Escalope','Escalope, crudités, sauce au choix.','6,00 €','8,50 € menu'],['MTP','Double steak, cheddar, sauce au choix.','5,90 €','8,00 € menu'],['3 fromages','Escalope au fromage et Boursin, sauce au choix.','7,50 €','10,00 € menu','images/3-fromages.jpg'],['Kefta','Kefta, cheddar, STO, sauce au choix.','6,00 €','8,00 € menu'],['Boursin','Escalope au fromage et Boursin, sauce au choix.','7,00 €','9,00 € menu'],['Mariné','Poulet mariné, cheddar, STO, sauce au choix.','7,00 €','9,00 € menu','images/marine.jpg'],['Commando','Triple steak, raclette, bacon, sauce au choix.','8,00 €','10,00 € menu'],['Fanatic','Double steak, cheddar, œuf, sauce au choix.','6,00 €','8,00 € menu'],['Barbecue','Double steak, bacon, STO, cheddar, sauce au choix.','7,00 €','9,00 € menu']],
+      tacos:[['Simple','1 viande au choix.','6,50 €','8,50 € menu','images/tacos.jpg'],['Double','2 viandes au choix.','8,00 €','10,00 € menu','images/tacos.jpg'],['Triple','3 viandes au choix.','9,50 €','11,50 € menu','images/tacos.jpg'],['Gratiné','Cheddar, emmental, raclette, chèvre, Boursin ou mozzarella.','+1,50 €','option']],
+      burgers:[['Cheese','Steak, cheddar, STO, sauce au choix.','6,00 €','8,00 € menu'],['Chicken','Chicken, cheddar, STO, sauce au choix.','5,00 €','7,00 € menu'],['Double cheese','2 steaks, cheddar, STO, sauce au choix.','7,00 €','9,00 € menu'],['American','Double steak, STO, cheddar, sauce au choix.','8,00 €','10,00 € menu'],['Country','2 steaks, GPF, cheddar, STO, œuf.','8,50 €','10,90 € menu']],
+      texmex:[['Wings x5','Ailerons de poulet.','3,90 €',''],['Wings x8','Ailerons de poulet.','6,50 €',''],['Wings x10','Ailerons de poulet.','8,00 €',''],['Box x6','Tenders, nuggets ou sticks mozzarella.','5,90 €','6 pièces'],['Oignons rings','Portion tex mex.','5,90 €','6 pièces'],['Jalapeños','Portion tex mex.','5,90 €','6 pièces']],
+      extras:[['Box Family','10 tenders, 2 canettes et 2 frites.','23,00 €','à partager'],['Box étudiant 1','1 viande au choix + 1 boisson.','6,50 €',''],['Box étudiant 2','2 viandes au choix + 1 boisson.','8,50 €',''],['Menu enfant','Burger ou nuggets + accompagnement.','6,00 €',''],['Pâtes tomate basilic','Sauce tomate et basilic.','7,00 €',''],['Pâtes bolognaise','Sauce bolognaise.','10,00 €',''],['Pâtes carbonara','Sauce carbonara.','10,00 €',''],['Pâtes forestière','Sauce forestière.','10,00 €',''],['Pâtes saumon','Sauce saumon.','10,00 €',''],['Salade verte','Salade fraîche.','4,00 €',''],['Salade tomate mozzarella','Tomate, mozzarella, basilic.','7,00 €',''],['Salade mixte','Salade composée.','7,50 €',''],['Salade César','Poulet grillé, parmesan, croûtons, tomates cerises.','8,50 €','10,00 € menu','images/salade-cesar.png'],['Tiramisu','Dessert, au choix.','3,00 €','','images/tiramisu.jpg'],['Tarte Daim','Part de tarte Daim.','3,00 €',''],['Boisson 33 cl','Canette au choix.','1,50 €',''],['Boisson 1,5 L','Bouteille au choix.','3,00 €','']],
+      boissons:[['Coca-Cola','Canette 33 cl.','1,50 €','33 cl','images/coca-cola.jpg'],['Coca Cola Zero','Canette 33 cl.','1,50 €','33 cl','images/coca-cola.jpg'],['Tropico','Canette 33 cl.','1,50 €','33 cl'],['Orangina','Canette 33 cl · Pulpe d’orange.','1,50 €','33 cl','images/orangina.jpg'],['Oasis Tropical','Canette 33 cl · Tropical.','1,50 €','33 cl','images/oasis-tropical.jpg'],['Oasis Pommes','Canette 33 cl · Pomme.','1,50 €','33 cl'],['Oasis Framboise','Canette 33 cl · Framboise.','1,50 €','33 cl','images/oasis-fraise-framboise.jpg'],['7Up','Canette 33 cl.','1,50 €','33 cl'],['Schweppes Agrumes','Canette 33 cl · Agrumes.','1,50 €','33 cl','images/schweppes-agrumes.jpg'],['Schweppes Pommes','Canette 33 cl · Pomme.','1,50 €','33 cl'],['Ice Tea Lipton','Canette 33 cl · Pêche.','1,50 €','33 cl'],['Sprite','Canette 33 cl.','1,50 €','33 cl'],['Coca-Cola Cherry','Canette 33 cl · Cerise.','1,50 €','33 cl','images/coca-cola.jpg'],['Bouteille Cristaline','Bouteille 50 cl.','1,00 €','50 cl'],['Cristaline Grande','Bouteille 1,5 L.','2,00 €','1,5 L'],['Capri Sun','Poche 20 cl.','1,50 €','20 cl'],['Fanta Citron Frappé','Canette 33 cl · Citron.','1,50 €','33 cl','images/fanta.jpg']]
+    };
+    const grid=document.querySelector('#menuGrid');const tabs=document.querySelectorAll('.tab');
+    const money=n=>n.toFixed(2).replace('.',',')+' €';
+    const unitPrice=s=>{const m=/^(\d+(?:,\d+)?)/.exec(s.trim());return m?parseFloat(m[1].replace(',','.')):0};
+    const buyable=p=>/^\d/.test(p.trim());
+    let currentCat='sandwiches';
+    function render(cat){currentCat=cat;grid.innerHTML=data[cat].map(([n,d,p,s,img])=>{const thumb=img?`<img src="${img}" alt="${n}" class="item-thumb" loading="lazy" onerror="this.style.display='none'">`:'';const cls=img?'item has-thumb':'item';return `<article class="${cls}">${thumb}<div><h3>${n}</h3><p>${d}</p></div><div class="price">${buyable(p)?`<button class="add" aria-label="Ajouter ${n} au panier">+</button>`:''}<span>${p}</span><small>${s}</small></div></article>`}).join('')}
+    tabs.forEach(t=>t.addEventListener('click',()=>{tabs.forEach(x=>x.setAttribute('aria-selected','false'));t.setAttribute('aria-selected','true');render(t.dataset.cat)}));render('sandwiches');
+    const toggle=document.querySelector('#toggle'),links=document.querySelector('#navlinks');toggle.addEventListener('click',()=>{const open=links.classList.toggle('open');toggle.setAttribute('aria-expanded',open);toggle.textContent=open?'×':'☰'});links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{links.classList.remove('open');toggle.setAttribute('aria-expanded','false');toggle.textContent='☰'}));
+
+    // ===== PANIER =====
+    let cart={};try{cart=JSON.parse(localStorage.getItem('otk-cart'))||{}}catch(e){}
+    const drawer=document.querySelector('#drawer'),backdrop=document.querySelector('#backdrop'),cartBody=document.querySelector('#cartBody'),cartTotal=document.querySelector('#cartTotal'),cartCount=document.querySelector('#cartCount'),payBtn=document.querySelector('#payBtn'),payNote=document.querySelector('#payNote');
+    function renderCart(){
+      const names=Object.keys(cart);let total=0,count=0;
+      cartBody.innerHTML=names.length?names.map(k=>{const c=cart[k],t=c.qty*unitPrice(c.p);total+=t;count+=c.qty;
+        return `<div class="ditem"><div><strong>${k}</strong><span class="unit">${c.p} · <button class="mini" data-k="${k}" data-d="-1" aria-label="Retirer un">−</button> ${c.qty} <button class="mini" data-k="${k}" data-d="1" aria-label="Ajouter un">+</button></span></div><strong>${money(t)}</strong></div>`}).join('')
+      :'<p class="empty">Panier vide.</p>';
+      cartTotal.textContent=money(total);cartCount.textContent=count;payBtn.disabled=!names.length;
+      try{localStorage.setItem('otk-cart',JSON.stringify(cart))}catch(e){}
+    }
+    grid.addEventListener('click',e=>{const b=e.target.closest('.add');if(!b)return;const n=b.closest('.item').querySelector('h3').textContent;const it=data[currentCat].find(x=>x[0]===n);if(!it)return;cart[n]=cart[n]||{n,p:it[2],qty:0};cart[n].qty++;b.classList.remove('pulse');void b.offsetWidth;b.classList.add('pulse');const badge=cartCount;badge.classList.remove('bump');void badge.offsetWidth;badge.classList.add('bump');renderCart()});
+    cartBody.addEventListener('click',e=>{const b=e.target.closest('.mini');if(!b)return;const c=cart[b.dataset.k];if(!c)return;c.qty+=+b.dataset.d;if(c.qty<1)delete cart[b.dataset.k];renderCart()});
+    const setDrawer=o=>{drawer.classList.toggle('open',o);backdrop.classList.toggle('show',o)};
+    document.querySelector('#cartToggle').addEventListener('click',()=>setDrawer(true));
+    document.querySelector('#closeCart').addEventListener('click',()=>setDrawer(false));
+    backdrop.addEventListener('click',()=>setDrawer(false));
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')setDrawer(false)});
+
+    // ===== PAIEMENT VIA BACKEND RUST + STRIPE =====
+    const BACKEND_URL=""; // même origine => /api/checkout
+    async function checkout(){
+      const names=Object.keys(cart);if(!names.length)return;
+      const tryLegacy=()=>{
+        if(names.length===1&&STRIPE_LINKS[names[0]]){window.location.href=STRIPE_LINKS[names[0]]+'?quantity='+cart[names[0]].qty;return true}
+        return false;
+      };
+      payBtn.disabled=true;const origText=payBtn.textContent;payBtn.textContent="Redirection...";
+      payNote.textContent="Création de la session de paiement...";
+      try{
+        const items=names.map(k=>{const c=cart[k];return {name:k,unit_amount:Math.round(unitPrice(c.p)*100),quantity:c.qty}}).filter(it=>it.unit_amount>0);
+        if(!items.length) throw new Error("Prix invalide");
+        const res=await fetch(`${BACKEND_URL}/api/checkout`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({items})});
+        const data=await res.json().catch(()=>({}));
+        if(res.ok&&data.url){window.location.href=data.url;return}
+        if(res.status===503&&tryLegacy()) return;
+        const msg=data.error||`Erreur ${res.status}`;
+        payNote.innerHTML=`${msg}<br><a href="tel:0769715620" style="text-decoration:underline">Commander par téléphone ↗</a>`;
+      }catch(e){
+        if(tryLegacy()) return;
+        payNote.innerHTML=`Impossible de joindre le paiement: ${e.message}<br><a href="tel:0769715620" style="text-decoration:underline">Commander par téléphone ↗</a>`;
+      }finally{
+        payBtn.textContent=origText;renderCart();
+      }
+    }
+    payBtn.addEventListener('click',checkout);
+    (function handleReturn(){
+      const p=new URLSearchParams(location.search);
+      if(p.has('success')) payNote.innerHTML='✅ Paiement réussi ! Merci pour votre commande.';
+      else if(p.has('canceled')) payNote.textContent='Paiement annulé. Vous pouvez réessayer.';
+      if(p.has('success')||p.has('canceled')) history.replaceState({},'',location.pathname+location.hash);
+    })();
+    fetch(`${BACKEND_URL}/api/config`).then(r=>r.json()).then(cfg=>{
+      if(!cfg.has_stripe) payNote.innerHTML='Paiement en ligne en cours de configuration — <a href="tel:0769715620" style="text-decoration:underline">commande par téléphone ↗</a>';
+    }).catch(()=>{});
+    renderCart();
+  </script>
+</body>
+</html>
