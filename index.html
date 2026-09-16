@@ -84,20 +84,24 @@
     <div class="drawer-body" id="cartBody"></div>
     <div class="drawer-foot">
       <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
-      <button class="btn primary pay" id="payBtn" disabled>Payer en ligne</button>
+      <button class="btn primary pay" id="payBtn" disabled>Payer par carte (Stripe)</button>
+      <div id="paypalWrap" style="margin-top:10px;display:none"><div id="paypalButtons"></div></div>
       <a class="btn outline" href="tel:0769715620" style="width:100%;margin-top:10px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Commander par téléphone</a>
-      <p class="note" id="payNote">Paiement sécurisé par Stripe · à emporter ou en livraison</p>
+      <p class="note" id="payNote">Paiement sécurisé · carte via Stripe, ou PayPal · à emporter ou en livraison</p>
     </div>
   </aside>
   <script>
-    // ===== CONFIGURATION STRIPE (à faire une seule fois) =====
-    // 1) Créez un compte gratuit sur https://stripe.com
-    // 2) Dashboard > Produits > créez chaque article avec son prix,
-    //    puis « Lien de paiement » : copiez l'URL (https://buy.stripe.com/...)
-    // 3) Collez les liens ci-dessous, ex. :
-    //    const STRIPE_LINKS={ 'Kebab':'https://buy.stripe.com/xxxx', 'Tacos Simple':'https://buy.stripe.com/yyyy' };
-    // Un article sans lien restera commandable par téléphone uniquement.
+    // ===== PAIEMENT EN LIGNE (Stripe + PayPal, 100% intégré) =====
+    // OPTION 1 (recommandée, sans serveur) : PayPal — gratuit, 5 min :
+    //   1) https://developer.paypal.com > Dashboard > Apps & Credentials > Live > Client ID
+    //   2) Collez-le ci-dessous. Le bouton PayPal apparaît dans le panier et encaisse le total exact.
+    // OPTION 2 (sans serveur) : Stripe Liens de paiement :
+    //   Dashboard Stripe > Produits > chaque article > « Lien de paiement » > copiez l'URL buy.stripe.com/...
+    // OPTION 3 (panier complet par carte) : backend Rust + Stripe Checkout (POST /api/checkout).
+    //   Nécessite STRIPE_SECRET_KEY côté serveur (Render/Fly). Le bouton « Payer par carte » l'utilise en priorité.
     const STRIPE_LINKS={};
+    const PAYPAL_CLIENT_ID=""; // ex. "AbCdEf...": laissez vide pour désactiver PayPal
+    const PAYPAL_CURRENCY="EUR";
     const data={
       sandwiches:[['Kebab','Pain, viande kebab, crudités, sauce au choix.','6,00 €','8,00 € menu'],['Steak frites','Steak, frites, sauce au choix.','5,50 €','7,50 € menu'],['Tenders','Tenders, crudités, sauce au choix.','5,50 €','7,50 € menu'],['Cordon bleu','Cordon bleu, crudités, sauce au choix.','5,50 €','7,50 € menu'],['Escalope','Escalope, crudités, sauce au choix.','6,00 €','8,50 € menu'],['MTP','Double steak, cheddar, sauce au choix.','5,90 €','8,00 € menu'],['3 fromages','Escalope au fromage et Boursin, sauce au choix.','7,50 €','10,00 € menu','images/3-fromages.jpg'],['Kefta','Kefta, cheddar, STO, sauce au choix.','6,00 €','8,00 € menu'],['Boursin','Escalope au fromage et Boursin, sauce au choix.','7,00 €','9,00 € menu'],['Mariné','Poulet mariné, cheddar, STO, sauce au choix.','7,00 €','9,00 € menu','images/marine.jpg'],['Commando','Triple steak, raclette, bacon, sauce au choix.','8,00 €','10,00 € menu'],['Fanatic','Double steak, cheddar, œuf, sauce au choix.','6,00 €','8,00 € menu'],['Barbecue','Double steak, bacon, STO, cheddar, sauce au choix.','7,00 €','9,00 € menu']],
       tacos:[['Simple','1 viande au choix.','6,50 €','8,50 € menu','images/tacos.jpg'],['Double','2 viandes au choix.','8,00 €','10,00 € menu','images/tacos.jpg'],['Triple','3 viandes au choix.','9,50 €','11,50 € menu','images/tacos.jpg'],['Gratiné','Cheddar, emmental, raclette, chèvre, Boursin ou mozzarella.','+1,50 €','option']],
@@ -134,8 +138,9 @@
     backdrop.addEventListener('click',()=>setDrawer(false));
     document.addEventListener('keydown',e=>{if(e.key==='Escape')setDrawer(false)});
 
-    // ===== PAIEMENT VIA BACKEND RUST + STRIPE =====
+    // ===== PAIEMENT VIA BACKEND RUST + STRIPE + PAYPAL DIRECT =====
     const BACKEND_URL=""; // même origine => /api/checkout
+    const cartTotalEuros=()=>{let t=0;for(const k of Object.keys(cart)){t+=cart[k].qty*unitPrice(cart[k].p)}return Math.round(t*100)/100};
     async function checkout(){
       const names=Object.keys(cart);if(!names.length)return;
       const tryLegacy=()=>{
@@ -150,11 +155,13 @@
         const res=await fetch(`${BACKEND_URL}/api/checkout`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({items})});
         const data=await res.json().catch(()=>({}));
         if(res.ok&&data.url){window.location.href=data.url;return}
-        if(res.status===503&&tryLegacy()) return;
+        if((res.status===503||res.status===404)&&tryLegacy()) return;
+        if(!res.ok&&PAYPAL_CLIENT_ID){payNote.innerHTML=`Paiement carte indisponible ici — payez avec <strong>PayPal</strong> ci-dessous 👇 ou <a href="tel:0769715620" style="text-decoration:underline">par téléphone ↗</a>`;return}
         const msg=data.error||`Erreur ${res.status}`;
         payNote.innerHTML=`${msg}<br><a href="tel:0769715620" style="text-decoration:underline">Commander par téléphone ↗</a>`;
       }catch(e){
         if(tryLegacy()) return;
+        if(PAYPAL_CLIENT_ID){payNote.innerHTML=`Site statique (sans serveur) — payez avec <strong>PayPal</strong> ci-dessous 👇 ou <a href="tel:0769715620" style="text-decoration:underline">par téléphone ↗</a>`;return}
         payNote.innerHTML=`Impossible de joindre le paiement: ${e.message}<br><a href="tel:0769715620" style="text-decoration:underline">Commander par téléphone ↗</a>`;
       }finally{
         payBtn.textContent=origText;renderCart();
@@ -163,13 +170,39 @@
     payBtn.addEventListener('click',checkout);
     (function handleReturn(){
       const p=new URLSearchParams(location.search);
-      if(p.has('success')) payNote.innerHTML='✅ Paiement réussi ! Merci pour votre commande.';
+      if(p.has('success')){payNote.innerHTML='✅ Paiement réussi ! Merci pour votre commande.';cart={};renderCart()}
       else if(p.has('canceled')) payNote.textContent='Paiement annulé. Vous pouvez réessayer.';
       if(p.has('success')||p.has('canceled')) history.replaceState({},'',location.pathname+location.hash);
     })();
     fetch(`${BACKEND_URL}/api/config`).then(r=>r.json()).then(cfg=>{
-      if(!cfg.has_stripe) payNote.innerHTML='Paiement en ligne en cours de configuration — <a href="tel:0769715620" style="text-decoration:underline">commande par téléphone ↗</a>';
-    }).catch(()=>{});
+      if(!cfg.has_stripe&&!PAYPAL_CLIENT_ID&&Object.keys(STRIPE_LINKS).length===0) payNote.innerHTML='Paiement en ligne en cours d’activation — <a href="tel:0769715620" style="text-decoration:underline">commande par téléphone ↗</a>';
+      else if(!cfg.has_stripe&&PAYPAL_CLIENT_ID) payNote.innerHTML='Payez en ligne avec <strong>PayPal</strong> ci-dessous 👇 — carte via Stripe dès que le serveur est en ligne.';
+    }).catch(()=>{
+      if(PAYPAL_CLIENT_ID) payNote.innerHTML='Payez en ligne avec <strong>PayPal</strong> ci-dessous 👇 ou <a href="tel:0769715620" style="text-decoration:underline">par téléphone ↗</a>';
+      else if(Object.keys(STRIPE_LINKS).length>0) payNote.innerHTML='Paiement par lien Stripe disponible — <a href="tel:0769715620" style="text-decoration:underline">ou par téléphone ↗</a>';
+    });
+    // ===== PAYPAL BOUTONS (sans serveur, encaisse le total exact) =====
+    (function initPayPal(){
+      if(!PAYPAL_CLIENT_ID) return;
+      document.querySelector('#paypalWrap').style.display='block';
+      const s=document.createElement('script');
+      s.src=`https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(PAYPAL_CLIENT_ID)}&currency=${encodeURIComponent(PAYPAL_CURRENCY)}&intent=capture&disable-funding=credit`;
+      s.onload=()=>{
+        if(!window.paypal) return;
+        paypal.Buttons({
+          style:{layout:'vertical',color:'black',shape:'rect',label:'pay'},
+          createOrder:(data,actions)=>{
+            const total=cartTotalEuros().toFixed(2);
+            if(!total||+total<=0) throw new Error('Panier vide');
+            const items=Object.keys(cart).map(k=>({name:k.slice(0,120),unit_amount:{currency_code:PAYPAL_CURRENCY,value:(unitPrice(cart[k].p)).toFixed(2)},quantity:String(cart[k].qty)}));
+            return actions.order.create({purchase_units:[{description:"O'Turkish Kebab",amount:{currency_code:PAYPAL_CURRENCY,value:total,breakdown:{item_total:{currency_code:PAYPAL_CURRENCY,value:total}}},items}]});
+          },
+          onApprove:(data,actions)=>actions.order.capture().then(details=>{cart={};renderCart();payNote.innerHTML=`✅ Paiement PayPal réussi, merci ${details.payer?.name?.given_name||''} ! Commande ${details.id}. <a href="tel:0769715620" style="text-decoration:underline">Confirmer par téléphone ↗</a>`;setDrawer(true)}),
+          onError:err=>{payNote.textContent='Paiement PayPal annulé ou refusé, réessayez ou commandez par téléphone.'}
+        }).render('#paypalButtons');
+      };
+      document.head.appendChild(s);
+    })();
     renderCart();
   </script>
 </body>
