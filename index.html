@@ -140,6 +140,7 @@
       <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
       <div class="cust"><div><label for="custName">Votre nom</label><input id="custName" placeholder="Ex : Karim" autocomplete="name"></div><div><label for="custPhone">Votre téléphone</label><input id="custPhone" placeholder="Ex : 0612345678" inputmode="tel" autocomplete="tel"></div></div>
       <button class="btn primary pay" id="payBtn" disabled style="margin-top:12px">Payer par carte (Stripe)</button>
+      <button class="btn outline" id="cashBtn" style="width:100%;margin-top:10px;min-height:46px">Commander — payer sur place</button>
       <div id="paypalWrap" style="margin-top:10px;display:none"><div id="paypalButtons"></div></div>
       <a class="btn outline" href="tel:0769715620" style="width:100%;margin-top:10px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Commander par téléphone</a>
       <p class="note" id="payNote">Paiement sécurisé · carte via Stripe, ou PayPal · à emporter ou en livraison</p>
@@ -196,15 +197,42 @@
     // ===== PAIEMENT VIA BACKEND RUST + STRIPE + PAYPAL DIRECT =====
     const BACKEND_URL=""; // même origine => /api/checkout
     const cartTotalEuros=()=>{let t=0;for(const k of Object.keys(cart)){t+=cart[k].qty*unitPrice(cart[k].p)}return Math.round(t*100)/100};
-    async function checkout(){
-      const names=Object.keys(cart);if(!names.length)return;
+    function readCustomer(){
       const custName=document.querySelector('#custName').value.trim();
       const custPhone=document.querySelector('#custPhone').value.trim().replace(/[\s.]/g,'');
-      if(!custName){payNote.textContent='Indiquez votre nom pour commander.';document.querySelector('#custName').focus();return}
-      if(!/^[+\d][\d]{5,19}$/.test(custPhone)){payNote.textContent='Numéro de téléphone invalide.';document.querySelector('#custPhone').focus();return}
-      const pendingItems=names.map(k=>({name:k,unit_amount:Math.round(unitPrice(cart[k].p)*100),quantity:cart[k].qty})).filter(it=>it.unit_amount>0);
+      if(!custName){payNote.textContent='Indiquez votre nom pour commander.';document.querySelector('#custName').focus();return null}
+      if(!/^[+\d][\d]{5,19}$/.test(custPhone)){payNote.textContent='Numéro de téléphone invalide.';document.querySelector('#custPhone').focus();return null}
+      return {customer_name:custName,customer_phone:custPhone};
+    }
+    function cartItems(){
+      return Object.keys(cart).map(k=>({name:k,unit_amount:Math.round(unitPrice(cart[k].p)*100),quantity:cart[k].qty})).filter(it=>it.unit_amount>0);
+    }
+    // Commande SANS payer (test + paiement sur place / espèces)
+    async function cashOrder(){
+      const btn=document.querySelector('#cashBtn');
+      if(!Object.keys(cart).length){payNote.textContent='Panier vide.';return}
+      const cust=readCustomer();if(!cust)return;
+      const items=cartItems();
+      if(!items.length){payNote.textContent='Prix invalide.';return}
+      btn.disabled=true;const t=btn.textContent;btn.textContent='Envoi...';
+      try{
+        const res=await fetch(`${BACKEND_URL}/api/orders`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({items,...cust})});
+        const data=await res.json().catch(()=>({}));
+        if(!res.ok) throw new Error(data.error||('Erreur '+res.status));
+        cart={};renderCart();
+        try{localStorage.setItem('otk-last-order',data.id);document.querySelector('#trackId').value=data.id}catch(e){}
+        setDrawer(true);
+        payNote.innerHTML=`✅ Commande <strong>${data.id}</strong> envoyée en cuisine — paiement sur place.<br><a href="#commandes" style="text-decoration:underline">Suivre ma commande ↗</a><a class="wa" href="${waLink(data.order)}" target="_blank" rel="noopener">📲 Envoyer sur WhatsApp</a>`;
+      }catch(e){payNote.textContent=`Envoi impossible : ${e.message}. Vérifiez la connexion.`}
+      finally{btn.disabled=false;btn.textContent=t;renderCart()}
+    }
+    document.querySelector('#cashBtn').addEventListener('click',cashOrder);
+    async function checkout(){
+      const names=Object.keys(cart);if(!names.length)return;
+      const cust=readCustomer();if(!cust)return;
+      const pendingItems=cartItems();
       if(!pendingItems.length){payNote.textContent='Prix invalide.';return}
-      try{sessionStorage.setItem('otk-pending',JSON.stringify({items:pendingItems,customer_name:custName,customer_phone:custPhone}))}catch(e){}
+      try{sessionStorage.setItem('otk-pending',JSON.stringify({items:pendingItems,...cust}))}catch(e){}
       const tryLegacy=()=>{
         if(names.length===1&&STRIPE_LINKS[names[0]]){window.location.href=STRIPE_LINKS[names[0]]+'?quantity='+cart[names[0]].qty;return true}
         return false;
@@ -331,12 +359,14 @@
     });
     document.querySelector('#survBtn').addEventListener('click',()=>{
       survOn=!survOn;
-      document.querySelector('#survBtn').textContent=survOn?'🔕 Couper la surveillance':'🔔 Activer la surveillance';
+      document.querySelector('#survBtn').textContent=survOn?'🔕 Couper la surveillance':'🔔 Activer la surveillance (son)';
       document.querySelector('#survDot').classList.toggle('on',survOn);
       document.querySelector('#survLabel').textContent=survOn?'surveillance ACTIVE — laissez cet écran ouvert':'surveillance coupée';
-      if(survOn){ensureAudio();pollKitchen();survTimer=setInterval(pollKitchen,5000)}
-      else{clearInterval(survTimer);stopSiren()}
+      if(survOn){ensureAudio();pollKitchen()}
+      else{stopSiren()}
     });
+    // Affichage auto des commandes (sans son) + rafraîchi toutes les 5 s
+    pollKitchen();setInterval(pollKitchen,5000);
     renderCart();
   </script>
 </body>
