@@ -51,6 +51,8 @@ struct Order {
     total_cents: i64,
     customer_name: String,
     customer_phone: String,
+    order_type: String, // livraison | emporter
+    address: String,
     status: String, // new | accepted | refused
     created_at: u64,
 }
@@ -60,6 +62,8 @@ struct CreateOrderRequest {
     items: Vec<OrderItem>,
     customer_name: String,
     customer_phone: String,
+    order_type: String,
+    address: String,
 }
 
 struct ShopState {
@@ -90,6 +94,11 @@ fn format_kitchen_call(order: &Order) -> String {
         order.customer_name,
         order.customer_phone
     ));
+    if order.order_type == "livraison" {
+        s.push_str(&format!("Livraison au {}. ", order.address));
+    } else {
+        s.push_str("A emporter. ");
+    }
     s.push_str("Validez la commande sur la page cuisine.");
     s
 }
@@ -139,6 +148,21 @@ async fn create_order(
     }
     let name = payload.customer_name.trim().to_string();
     let phone = payload.customer_phone.trim().to_string();
+    let order_type = payload.order_type.trim().to_lowercase();
+    let address = payload.address.trim().to_string();
+    if order_type != "livraison" && order_type != "emporter" {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(serde_json::json!({"error": "Type de commande invalide"})),
+        );
+    }
+    if order_type == "livraison" && (address.len() < 5 || address.len() > 200) {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(serde_json::json!({"error": "Adresse de livraison invalide"})),
+        );
+    }
+    let address = if order_type == "livraison" { address } else { String::new() };
     if name.is_empty() || name.len() > 80 {
         return (
             StatusCode::BAD_REQUEST,
@@ -170,6 +194,8 @@ async fn create_order(
         total_cents: total,
         customer_name: name,
         customer_phone: phone,
+        order_type: order_type.clone(),
+        address,
         status: "new".into(),
         created_at: now_secs(),
     };

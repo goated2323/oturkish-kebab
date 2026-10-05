@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--black:#111;--white:#fff;--grey:#666;--light-grey:#888;--line:#e5e5e5;--bg:#fafafa;--accent:#b3541e;--accent-soft:#fdf3ec;--green:#157f3d;--red:#c22e2e;--font-display:'Fraunces',Georgia,'Times New Roman',serif;--font-body:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--white);color:var(--black);font:16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em}
+    :root{--black:#171310;--white:#fff;--grey:#6b5f56;--light-grey:#a39386;--line:#efe3d8;--bg:#fffaf4;--accent:#c1272d;--accent-dark:#8f161b;--gold:#e8a33d;--gold-soft:#fdf0d5;--accent-soft:#fdeceb;--green:#157f3d;--red:#c22e2e;--font-display:'Fraunces',Georgia,'Times New Roman',serif;--font-body:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--bg);color:var(--black);font:16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em}
     .wrap{width:min(1060px,calc(100% - 32px));margin:auto}@media(min-width:768px){.wrap{width:min(1060px,calc(100% - 48px))}}
     .notice{text-align:center;padding:9px 12px;background:var(--black);color:var(--white);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}@media(min-width:768px){.notice{padding:10px 16px;font-size:11px}}
     header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px)}
@@ -26,7 +26,18 @@
     .hero h1{max-width:640px;margin-top:16px;font-size:clamp(1.9rem,8vw,4.2rem);line-height:1.05;letter-spacing:-.03em}@media(min-width:768px){.hero h1{margin-top:22px}}
     .lead{max-width:520px;margin-top:16px;color:var(--grey);font-size:15px;line-height:1.6}@media(min-width:768px){.lead{margin-top:24px;font-size:16px;line-height:1.65}}
     .actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}@media(min-width:768px){.actions{gap:12px;margin-top:36px}}
-    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border:1px solid var(--black);border-radius:2px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all 150ms ease;white-space:nowrap;touch-action:manipulation}@media(min-width:768px){.btn{min-height:46px;padding:0 24px}}.btn.primary{background:var(--black);color:var(--white)}.btn.primary:hover{background:var(--white);color:var(--black)}.btn.primary:active{transform:scale(.98)}.btn.outline{background:transparent;color:var(--black)}.btn.outline:hover{background:var(--black);color:var(--white)}
+    /* Hiérarchie des boutons : 1 action dominante, le reste s'efface */
+    .btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 22px;border:1px solid transparent;border-radius:999px;font-size:12.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;transition:all 160ms ease;white-space:nowrap;touch-action:manipulation;box-shadow:none}@media(min-width:768px){.btn{min-height:50px;padding:0 28px}}
+    .btn.primary{background:linear-gradient(135deg,var(--accent),var(--accent-dark));border-color:var(--accent-dark);color:#fff;box-shadow:0 8px 22px rgba(193,39,45,.35)}
+    .btn.primary:hover{transform:translateY(-1px);box-shadow:0 12px 28px rgba(193,39,45,.45);color:#fff}
+    .btn.primary:active{transform:scale(.98)}
+    .btn.dark{background:var(--black);border-color:var(--black);color:#fff}
+    .btn.dark:hover{background:#2b2320}
+    .btn.outline{background:transparent;color:var(--black);border-color:#d8c4b2}
+    .btn.outline:hover{border-color:var(--black);background:rgba(0,0,0,.03)}
+    .btn.ghost-light{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.5);color:#fff;backdrop-filter:blur(4px)}
+    .btn.ghost-light:hover{background:rgba(255,255,255,.22)}
+    .btn:disabled{opacity:.4;cursor:not-allowed;transform:none!important;box-shadow:none}
     .availability{margin-top:20px;color:var(--light-grey);font-size:12px;letter-spacing:.04em;line-height:1.5}@media(min-width:768px){.availability{margin-top:28px}}.availability strong{color:var(--black);font-weight:600}
     section{padding:48px 0}@media(min-width:600px){section{padding:60px 0}}@media(min-width:768px){section{padding:72px 0}}@media(min-width:1024px){section{padding:90px 0}}
     .head{margin-bottom:32px}@media(min-width:768px){.head{margin-bottom:44px}}.kicker{color:var(--light-grey);font-size:10px;font-weight:500;letter-spacing:.18em;text-transform:uppercase}@media(min-width:768px){.kicker{font-size:11px}}.head h2{margin-top:10px;font-size:clamp(1.5rem,4vw,2.5rem);line-height:1.1;letter-spacing:-.02em}@media(min-width:768px){.head h2{margin-top:12px}}.intro{max-width:440px;margin-top:10px;color:var(--grey);font-size:13px;line-height:1.6}@media(min-width:768px){.intro{margin-top:14px;font-size:14px}}
@@ -49,6 +60,9 @@
     .cart-toggle{position:relative;display:inline-flex;align-items:center;gap:6px;padding:7px 10px;border:1px solid var(--line);border-radius:2px;background:none;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;cursor:pointer;transition:border-color 150ms ease,background 150ms ease;white-space:nowrap;min-height:40px;touch-action:manipulation}@media(min-width:768px){.cart-toggle{gap:8px;padding:9px 14px;font-size:12px}}.cart-toggle:hover{border-color:var(--black);background:var(--bg)}
     .badge{display:inline-grid;place-items:center;min-width:18px;height:18px;padding:0 4px;border-radius:999px;background:var(--black);color:var(--white);font-size:10px;font-weight:700;line-height:1}@media(min-width:768px){.badge{min-width:17px;height:17px}}
     .backdrop{position:fixed;inset:0;z-index:30;background:rgba(17,17,17,.45);backdrop-filter:blur(2px);-webkit-backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity 200ms ease}.backdrop.show{opacity:1;pointer-events:auto}
+    #cartBar{position:fixed;left:12px;right:12px;bottom:12px;z-index:20;display:none;align-items:center;justify-content:space-between;gap:10px;padding:15px 20px;border:0;border-radius:999px;background:linear-gradient(135deg,var(--accent),var(--accent-dark));color:#fff;font-weight:800;font-size:14px;letter-spacing:.03em;box-shadow:0 12px 30px rgba(193,39,45,.45);cursor:pointer}
+    #cartBar .badge{background:#fff;color:var(--accent)}
+    @media(min-width:768px){#cartBar{left:auto;right:24px;bottom:24px;min-width:300px}}
     .drawer{position:fixed;top:0;right:0;bottom:0;z-index:31;width:min(420px,100%);max-width:100vw;background:var(--white);border-left:1px solid var(--line);display:flex;flex-direction:column;transform:translateX(100%);transition:transform 260ms cubic-bezier(.32,.72,0,1)}.drawer.open{transform:none}
     .drawer-head{display:flex;align-items:center;justify-content:space-between;padding:16px 16px;border-bottom:1px solid var(--line);min-height:56px}@media(min-width:768px){.drawer-head{padding:20px 22px}}.drawer-head strong{font-size:14px}.x-btn{border:0;background:none;font-size:22px;line-height:1;cursor:pointer;color:var(--grey);padding:6px;width:40px;height:40px;display:grid;place-items:center;border-radius:2px;transition:color 150ms ease,background 150ms ease}.x-btn:hover{color:var(--black);background:var(--bg)}
     .drawer-body{flex:1;overflow:auto;padding:4px 16px}@media(min-width:768px){.drawer-body{padding:6px 22px}}.ditem{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}@media(min-width:768px){.ditem{gap:14px;padding:14px 0}}.ditem strong{font-size:13px;font-weight:600}@media(min-width:768px){.ditem strong{font-size:14px}}.ditem .unit{display:block;margin-top:4px;color:var(--light-grey);font-size:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
@@ -56,23 +70,49 @@
     .empty{color:var(--light-grey);font-size:13px;text-align:center;padding:32px 0}.drawer-foot{padding:16px;border-top:1px solid var(--line);background:var(--white)}@media(min-width:768px){.drawer-foot{padding:20px 22px}}.total{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:600;margin-bottom:12px}@media(min-width:768px){.total{margin-bottom:14px}}.pay{width:100%;min-height:46px}.pay:disabled{opacity:.35;cursor:not-allowed}.note{margin-top:10px;color:var(--light-grey);font-size:11px;text-align:center;line-height:1.5}
     footer{padding:24px 0;border-top:1px solid var(--line)}@media(min-width:768px){footer{padding:34px 0}}.footer{display:flex;flex-direction:column;gap:12px;color:var(--light-grey);font-size:11px;line-height:1.5}@media(min-width:600px){.footer{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;font-size:12px}}    .footer strong{color:var(--black)}.fine{max-width:58ch;order:2}@media(min-width:600px){.fine{order:0}}
     /* ===== Relooking pro : hero, cartes, commandes ===== */
-    .hero{background:radial-gradient(1100px 320px at 85% -60px,var(--accent-soft),transparent 60%)}
-    .hero h1{font-size:clamp(2.1rem,8vw,4.4rem);line-height:1.02}
+    .hero-banner{position:relative;color:#fff;overflow:hidden;background:#171310 url('images/tacos.jpg') center/cover no-repeat}
+    .hero-banner:after{content:'';position:absolute;inset:0;background:linear-gradient(100deg,rgba(15,10,8,.88) 20%,rgba(15,10,8,.55) 55%,rgba(15,10,8,.25) 100%)}
+    .hero-inner{position:relative;z-index:1;padding:64px 0 56px}@media(min-width:768px){.hero-inner{padding:110px 0 96px}}
+    .hero-banner .eyebrow{color:var(--gold)}
+    .hero-banner h1{font-size:clamp(2.3rem,8vw,4.6rem);line-height:1.02;text-shadow:0 2px 24px rgba(0,0,0,.4)}
+    .hero-banner h1 em{font-style:italic;color:var(--gold)}
+    .hero-banner .lead{color:#f3e7db}
+    .chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+    .chip{display:inline-flex;align-items:center;gap:6px;padding:6px 14px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);font-size:12px;font-weight:700;letter-spacing:.03em;backdrop-filter:blur(4px)}
+    .hero-banner .availability{color:#e8d9c8}.hero-banner .availability strong{color:#fff}
     .eyebrow{color:var(--accent);font-weight:700}
     .kicker{color:var(--accent);font-weight:700}
     .brand{font-family:var(--font-display);font-size:19px}
-    .item{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;transition:box-shadow 150ms ease,transform 150ms ease}
-    .item:hover{box-shadow:0 6px 22px rgba(0,0,0,.07)}
+    .item{background:var(--white);border:1px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:12px;transition:box-shadow 150ms ease,transform 150ms ease;box-shadow:0 2px 10px rgba(120,70,30,.05)}
+    .item:hover{box-shadow:0 10px 28px rgba(120,70,30,.12);transform:translateY(-1px)}
     .item h3{font-size:16px}@media(min-width:768px){.item h3{font-size:17px}}
-    .item-thumb{border-radius:8px}
-    .btn{border-radius:8px}
-    .phone,.cart-toggle,.add,.mini{border-radius:8px}
-    .visit-card{border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+    .item-thumb{border-radius:10px}
+    .price span{background:var(--gold-soft);color:#7a4d0f;border-radius:999px;padding:2px 10px;font-weight:800}
+    .add{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:800;box-shadow:0 4px 12px rgba(193,39,45,.3)}
+    .add:hover{background:var(--accent-dark)}
+    .phone,.cart-toggle,.mini{border-radius:999px}
+    .visit-card{border-radius:16px;box-shadow:0 10px 30px rgba(120,70,30,.08);border:1px solid var(--line)}
+    .notice{background:linear-gradient(90deg,var(--accent-dark),var(--accent));font-weight:700}
+    .tabs{border-bottom:2px solid var(--line);gap:8px;padding-bottom:10px}
+    .tab{border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 18px;min-height:auto;color:var(--grey);font-weight:700}
+    .tab:hover{border-color:var(--accent);color:var(--accent)}
+    .tab[aria-selected=true]{background:var(--black);border-color:var(--black);color:#fff}
+    .tab[aria-selected=true]:after{display:none}
+    .feature{background:var(--black);color:#f3e7db;border-block:1px solid var(--black)}
+    .feature .kicker{color:var(--gold)}
+    .feature h2{color:#fff}
+    .feature-copy{color:#d9c8b8}
+    .fact{border-color:var(--accent)}
+    .feature .fact strong{color:#fff}
+    .fact span{color:#c9b8a8}
     .drawer{box-shadow:-12px 0 40px rgba(0,0,0,.12)}
     .cust{margin-top:12px;display:grid;gap:8px}
     .cust label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--light-grey)}
-    .cust input{width:100%;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:var(--bg)}
-    .cust input:focus{outline:2px solid var(--black);background:var(--white)}
+    .cust input,.cust textarea{width:100%;min-height:44px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:14px;background:#fff;resize:vertical}
+    .cust input:focus,.cust textarea:focus{outline:2px solid var(--accent);border-color:var(--accent)}
+    .seg{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:4px}
+    .seg-btn{min-height:48px;border:1px solid var(--line);border-radius:12px;background:#fff;font-weight:800;font-size:13px;cursor:pointer;color:var(--grey)}
+    .seg-btn.on{background:var(--black);border-color:var(--black);color:#fff;box-shadow:0 6px 16px rgba(0,0,0,.18)}
     .track{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
     .track input{flex:1 1 180px;min-height:46px;padding:0 14px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;text-transform:uppercase}
     .pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
@@ -116,7 +156,7 @@
   <div class="notice">ouvert 7j/7 · 11h à minuit · livraison à partir de 15€</div>
   <header><div class="wrap nav"><a class="brand" href="#accueil" aria-label="O'Turkish Kebab"><span>O'Turkish<small>Kebab · Marseille 10e</small></span></a><nav class="navlinks" id="navlinks"><a href="#menu">La carte</a><a href="#maison">L’esprit maison</a><a href="#venir">Nous trouver</a><a href="#commandes">Commandes en cours</a></nav><div class="nav-actions"><a class="call" href="tel:0769715620">Commander ↗</a><button class="cart-toggle" id="cartToggle" aria-label="Ouvrir le panier">Panier <span class="badge" id="cartCount">0</span></button><button class="toggle" id="toggle" aria-label="Ouvrir la navigation" aria-expanded="false">☰</button></div></div></header>
   <main id="accueil">
-    <section class="wrap hero"><div class="eyebrow">street food · grillades · Marseille 10e</div><h1>Le kebab qui met tout le monde d’accord.</h1><p class="lead">Chez O'Turkish, on vient pour un sandwich bien chargé, on reste pour les frites. Kebab, tacos, burgers, tex mex et box à partager, servis sur place, à emporter ou en livraison.</p><div class="actions"><a class="btn primary" href="#menu">Voir la carte ↗</a><a class="btn outline" href="tel:0769715620">Appeler maintenant</a></div><div class="availability"><strong>Ouvert tous les jours</strong>, de 11h à minuit</div></section>
+    <section class="hero-banner"><div class="wrap hero-inner"><div class="eyebrow">street food · grillades · Marseille 10e</div><h1>Le kebab qui met <em>tout le monde</em> d’accord.</h1><p class="lead">Viandes grillées, frites maison, sauces généreuses. Kebab, tacos, burgers et box à partager — sur place, à emporter ou livré chaud chez toi.</p><div class="actions"><a class="btn primary" href="#menu">Voir la carte ↗</a><a class="btn ghost-light" href="tel:0769715620">Appeler</a></div><div class="chips"><span class="chip">⭐ 7j/7 · 11h – minuit</span><span class="chip">🛵 Livraison dès 15 €</span><span class="chip">📍 La Capelette</span></div></div></section>
     <section id="menu" class="wrap"><div class="head"><div class="kicker">01 · La carte</div><h2>Choisis ton terrain de jeu.</h2><p class="intro">Les menus incluent frites et boisson quand indiqué.</p></div><div class="tabs" role="tablist" aria-label="Catégories du menu"><button class="tab" role="tab" aria-selected="true" data-cat="sandwiches">Sandwiches</button><button class="tab" role="tab" aria-selected="false" data-cat="tacos">Tacos</button><button class="tab" role="tab" aria-selected="false" data-cat="burgers">Burgers</button><button class="tab" role="tab" aria-selected="false" data-cat="texmex">Tex Mex</button><button class="tab" role="tab" aria-selected="false" data-cat="extras">Extras</button><button class="tab" role="tab" aria-selected="false" data-cat="boissons">Boissons</button></div><div class="menu" id="menuGrid"></div></section>
     <section id="maison" class="feature"><div class="wrap feature-layout"><div><div class="kicker">02 · L’esprit maison</div><h2 style="margin-top:12px;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.1">Simple, généreux,<br>sans détour.</h2></div><div><div class="feature-copy"><p>O'Turkish, c’est l’adresse du 10e pour manger vite sans manger triste. Une carte large, des portions généreuses et les classiques qui font le job, du kebab au tacos triple viande.</p><p>À midi, après le travail ou quand la faim frappe fort, tu sais où aller.</p></div><div class="facts"><div class="fact"><strong>01 · À toute heure</strong><span>Ouvert 7 jours sur 7, de 11h à minuit.</span></div><div class="fact"><strong>02 · Pour chacun</strong><span>Sandwiches, burgers, tacos, pâtes, salades et box.</span></div><div class="fact"><strong>03 · À partager</strong><span>Box étudiant et Box Family pour les grosses faims.</span></div><div class="fact"><strong>04 · En livraison</strong><span>Livraison à partir de 15€, selon zone.</span></div></div></div></div></section>
     <section id="venir" class="wrap"><div class="head"><div class="kicker">03 · En pratique</div><h2>Rendez-vous à la Capelette.</h2></div><div class="visit-card"><h3>O'Turkish Kebab</h3><p>28 rue François Mauriac<br>13010 Marseille</p><div class="contact-grid"><div class="contact"><label>Horaires</label><strong>7j/7 · 11h à minuit</strong></div><div class="contact"><label>Services</label><strong>Sur place · À emporter</strong></div><div class="contact"><label>Livraison</label><strong>À partir de 15€</strong></div><div class="contact"><label>Commande</label><strong>Par téléphone</strong></div></div><div class="phones"><a class="phone" href="tel:0769715620">07 69 71 56 20</a><a class="phone" href="tel:0988353908">09 88 35 39 08</a><a class="phone" href="https://www.google.com/maps/search/?api=1&query=28+rue+Fran%C3%A7ois+Mauriac%2C+13010+Marseille" target="_blank" rel="noopener">Itinéraire ↗</a></div></div></section>
@@ -129,14 +169,16 @@
   </main>
   <footer><div class="wrap footer"><strong>O'Turkish Kebab</strong><div class="fine">28 rue François Mauriac, 13010 Marseille · 7j/7 · 11h–00h</div><span>Marseille · <a href="cuisine.html" style="text-decoration:underline">Cuisine</a></span></div></footer>
   <div class="backdrop" id="backdrop"></div>
+  <button id="cartBar" aria-label="Voir le panier"><span id="cartBarText">Panier vide</span><span class="badge" id="cartBarCount">0</span></button>
   <aside class="drawer" id="drawer" aria-label="Panier">
     <div class="drawer-head"><strong>Votre panier</strong><button class="x-btn" id="closeCart" aria-label="Fermer le panier">×</button></div>
     <div class="drawer-body" id="cartBody"></div>
     <div class="drawer-foot">
       <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
-      <div class="cust"><div><label for="custName">Votre nom</label><input id="custName" placeholder="Ex : Karim" autocomplete="name"></div><div><label for="custPhone">Votre téléphone</label><input id="custPhone" placeholder="Ex : 0612345678" inputmode="tel" autocomplete="tel"></div></div>
+      <div class="seg" role="group" aria-label="Mode de commande"><button type="button" class="seg-btn on" data-type="livraison">🛵 Livraison</button><button type="button" class="seg-btn" data-type="emporter">🛍️ À emporter</button></div>
+      <div class="cust"><div><label for="custName">Votre nom</label><input id="custName" placeholder="Ex : Karim" autocomplete="name"></div><div><label for="custPhone">Votre téléphone</label><input id="custPhone" placeholder="Ex : 0612345678" inputmode="tel" autocomplete="tel"></div><div id="addrWrap"><label for="custAddr">Adresse de livraison</label><textarea id="custAddr" rows="2" placeholder="N°, rue, ville, étage, code porte..."></textarea></div></div>
       <button class="btn primary pay" id="payBtn" disabled style="margin-top:12px">Payer par carte (Stripe)</button>
-      <button class="btn outline" id="cashBtn" style="width:100%;margin-top:10px;min-height:46px">Commander — payer sur place</button>
+      <button class="btn dark" id="cashBtn" style="width:100%;margin-top:10px;min-height:48px">Commander — payer sur place</button>
       <div id="paypalWrap" style="margin-top:10px;display:none"><div id="paypalButtons"></div></div>
       <a class="btn outline" href="tel:0769715620" style="width:100%;margin-top:10px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Commander par téléphone</a>
       <p class="note" id="payNote">Paiement sécurisé · carte via Stripe, ou PayPal · à emporter ou en livraison</p>
@@ -180,12 +222,16 @@
         return `<div class="ditem"><div><strong>${k}</strong><span class="unit">${c.p} · <button class="mini" data-k="${k}" data-d="-1" aria-label="Retirer un">−</button> ${c.qty} <button class="mini" data-k="${k}" data-d="1" aria-label="Ajouter un">+</button></span></div><strong>${money(t)}</strong></div>`}).join('')
       :'<p class="empty">Panier vide.</p>';
       cartTotal.textContent=money(total);cartCount.textContent=count;payBtn.disabled=!names.length;
+      const bar=document.querySelector('#cartBar');bar.style.display=count?'flex':'none';
+      document.querySelector('#cartBarText').textContent=count?`Voir le panier · ${money(total)}`:'Panier vide';
+      document.querySelector('#cartBarCount').textContent=count;
       try{localStorage.setItem('otk-cart',JSON.stringify(cart))}catch(e){}
     }
     grid.addEventListener('click',e=>{const b=e.target.closest('.add');if(!b)return;const n=b.closest('.item').querySelector('h3').textContent;const it=data[currentCat].find(x=>x[0]===n);if(!it)return;cart[n]=cart[n]||{n,p:it[2],qty:0};cart[n].qty++;b.classList.remove('pulse');void b.offsetWidth;b.classList.add('pulse');const badge=cartCount;badge.classList.remove('bump');void badge.offsetWidth;badge.classList.add('bump');renderCart()});
     cartBody.addEventListener('click',e=>{const b=e.target.closest('.mini');if(!b)return;const c=cart[b.dataset.k];if(!c)return;c.qty+=+b.dataset.d;if(c.qty<1)delete cart[b.dataset.k];renderCart()});
     const setDrawer=o=>{drawer.classList.toggle('open',o);backdrop.classList.toggle('show',o)};
     document.querySelector('#cartToggle').addEventListener('click',()=>setDrawer(true));
+    document.querySelector('#cartBar').addEventListener('click',()=>setDrawer(true));
     document.querySelector('#closeCart').addEventListener('click',()=>setDrawer(false));
     backdrop.addEventListener('click',()=>setDrawer(false));
     document.addEventListener('keydown',e=>{if(e.key==='Escape')setDrawer(false)});
@@ -193,12 +239,20 @@
     // ===== PAIEMENT VIA BACKEND RUST + STRIPE + PAYPAL DIRECT =====
     const BACKEND_URL=""; // même origine => /api/checkout
     const cartTotalEuros=()=>{let t=0;for(const k of Object.keys(cart)){t+=cart[k].qty*unitPrice(cart[k].p)}return Math.round(t*100)/100};
+    let orderType='livraison';
+    document.querySelectorAll('.seg-btn').forEach(b=>b.addEventListener('click',()=>{
+      document.querySelectorAll('.seg-btn').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+      orderType=b.dataset.type;
+      document.querySelector('#addrWrap').style.display=orderType==='livraison'?'':'none';
+    }));
     function readCustomer(){
       const custName=document.querySelector('#custName').value.trim();
       const custPhone=document.querySelector('#custPhone').value.trim().replace(/[\s.]/g,'');
+      const addr=document.querySelector('#custAddr').value.trim();
       if(!custName){payNote.textContent='Indiquez votre nom pour commander.';document.querySelector('#custName').focus();return null}
       if(!/^[+\d][\d]{5,19}$/.test(custPhone)){payNote.textContent='Numéro de téléphone invalide.';document.querySelector('#custPhone').focus();return null}
-      return {customer_name:custName,customer_phone:custPhone};
+      if(orderType==='livraison'&&addr.length<5){payNote.textContent='Indiquez votre adresse de livraison.';document.querySelector('#custAddr').focus();return null}
+      return {customer_name:custName,customer_phone:custPhone,order_type:orderType,address:orderType==='livraison'?addr:''};
     }
     function cartItems(){
       return Object.keys(cart).map(k=>({name:k,unit_amount:Math.round(unitPrice(cart[k].p)*100),quantity:cart[k].qty})).filter(it=>it.unit_amount>0);
@@ -297,8 +351,11 @@
       const lines=['🧾 NOUVELLE COMMANDE '+order.id,'----------------------'];
       order.items.forEach(it=>lines.push(`• ${it.quantity}x ${it.name} — ${eur(it.unit_amount*it.quantity)}`));
       lines.push('----------------------','Total : '+eur(order.total_cents),'Nom : '+order.customer_name,'Tél : '+order.customer_phone);
+      if(order.order_type==='livraison'){lines.push('🛵 LIVRAISON : '+(order.address||''))}
+      else{lines.push('🛍️ À emporter')}
       return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
     }
+    function orderModeFr(o){return o.order_type==='livraison'?`🛵 Livraison — ${o.address||''}`:'🛍️ À emporter'}
     async function confirmOrder(){
       let pending=null;try{pending=JSON.parse(sessionStorage.getItem('otk-pending'))}catch(e){}
       if(!pending||!pending.items||!pending.items.length){payNote.innerHTML='✅ Paiement réussi ! Merci pour votre commande.';return}
@@ -324,7 +381,7 @@
         const o=orders.find(x=>x.id.toUpperCase()===id);
         if(!o){box.innerHTML='<p class="note">Commande introuvable. Vérifiez le numéro.</p>';return}
         const lbl=o.status==='new'?'En cours':o.status==='accepted'?'Acceptée':'Refusée';
-        box.innerHTML=`<div class="kcard"><h3>${o.id} <span class="pill ${o.status}">${lbl}</span></h3><p style="margin-top:8px;font-size:15px;font-weight:700">${STATUS_FR[o.status]||o.status}</p><ul>${o.items.map(it=>`<li>${it.quantity}x ${it.name}</li>`).join('')}</ul><p style="margin-top:8px"><strong>Total : ${eur(o.total_cents)}</strong></p></div>`;
+        box.innerHTML=`<div class="kcard"><h3>${o.id} <span class="pill ${o.status}">${lbl}</span></h3><p style="margin-top:8px;font-size:15px;font-weight:700">${STATUS_FR[o.status]||o.status}</p><p style="color:var(--grey);font-size:13px;margin-top:4px">${orderModeFr(o)}</p><ul>${o.items.map(it=>`<li>${it.quantity}x ${it.name}</li>`).join('')}</ul><p style="margin-top:8px"><strong>Total : ${eur(o.total_cents)}</strong></p></div>`;
       }catch(e){box.innerHTML='<p class="note">Suivi indisponible pour le moment.</p>'}
     });
     try{const last=localStorage.getItem('otk-last-order');if(last)document.querySelector('#trackId').value=last}catch(e){}
