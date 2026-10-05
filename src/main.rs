@@ -215,7 +215,7 @@ async fn main() {
         .layer(CorsLayer::permissive())
         .layer(TraceLayer::new_for_http());
 
-    let addr = SocketAddr::from(([127, 0, 0, 1], port));
+    let addr = SocketAddr::from(([0, 0, 0, 0], port));
     tracing::info!("O'Turkish Kebab Rust en ligne : http://{}", addr);
     tracing::info!("API checkout : POST http://{}/api/checkout", addr);
     if env::var("STRIPE_SECRET_KEY").is_err() {
