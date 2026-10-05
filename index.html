@@ -125,13 +125,9 @@
         <div class="track"><input id="trackId" placeholder="OTK-..." autocomplete="off"><button class="btn primary" id="trackBtn">Suivre ma commande</button></div>
         <div id="trackResult" style="margin-top:14px"></div>
       </div>
-      <div class="visit-card" style="margin-top:20px"><h3>🔔 Espace cuisine <span class="pill new">réservé au restaurant</span></h3><p>Activez la surveillance sur l'écran du comptoir : chaque nouvelle commande déclenche une <strong>alarme forte en boucle</strong> jusqu'à Acceptation ou Refus.</p>
-        <div class="surv"><button class="btn primary big" id="survBtn" style="max-width:340px">🔔 Activer la surveillance</button><span><span class="dot" id="survDot"></span> <span id="survLabel">surveillance coupée</span></span></div>
-        <div id="kitchenOrders"></div>
-      </div>
     </section>
   </main>
-  <footer><div class="wrap footer"><strong>O'Turkish Kebab</strong><div class="fine">28 rue François Mauriac, 13010 Marseille · 7j/7 · 11h–00h</div><span>Marseille</span></div></footer>
+  <footer><div class="wrap footer"><strong>O'Turkish Kebab</strong><div class="fine">28 rue François Mauriac, 13010 Marseille · 7j/7 · 11h–00h</div><span>Marseille · <a href="cuisine.html" style="text-decoration:underline">Cuisine</a></span></div></footer>
   <div class="backdrop" id="backdrop"></div>
   <aside class="drawer" id="drawer" aria-label="Panier">
     <div class="drawer-head"><strong>Votre panier</strong><button class="x-btn" id="closeCart" aria-label="Fermer le panier">×</button></div>
@@ -332,41 +328,6 @@
       }catch(e){box.innerHTML='<p class="note">Suivi indisponible pour le moment.</p>'}
     });
     try{const last=localStorage.getItem('otk-last-order');if(last)document.querySelector('#trackId').value=last}catch(e){}
-    // ===== CUISINE : surveillance + alarme forte en boucle =====
-    let survOn=false,survTimer=null,knownDone=new Set(),audioCtx=null,sirenTimer=null,sirenOn=false;
-    function ensureAudio(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume()}
-    function beep(freq,dur){if(!audioCtx)return;try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='square';o.frequency.value=freq;g.gain.setValueAtTime(0.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.5,audioCtx.currentTime+0.02);g.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+dur);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur+0.05)}catch(e){}}
-    function startSiren(){if(sirenOn||!audioCtx)return;sirenOn=true;document.body.classList.add('alarm');let hi=false;sirenTimer=setInterval(()=>{beep(hi?880:620,0.35);hi=!hi;try{if(navigator.vibrate)navigator.vibrate(400)}catch(e){}},700)}
-    function stopSiren(){sirenOn=false;clearInterval(sirenTimer);document.body.classList.remove('alarm')}
-    async function pollKitchen(){
-      const box=document.querySelector('#kitchenOrders');
-      try{
-        const r=await fetch(`${BACKEND_URL}/api/orders`);const orders=await r.json();
-        const news=orders.filter(o=>o.status==='new');
-        if(news.length&&survOn){ensureAudio();startSiren()}
-        if(!news.length&&sirenOn)stopSiren();
-        if(!orders.length){box.innerHTML='<p class="empty">Aucune commande pour le moment.</p>';return}
-        box.innerHTML=orders.slice(0,12).map(o=>`<div class="kcard${o.status==='new'?' flash':''}"><h3>${o.id} <span class="pill ${o.status}">${o.status==='new'?'Nouvelle':o.status==='accepted'?'Acceptée':'Refusée'}</span></h3><p style="color:var(--grey);font-size:13px;margin-top:4px">${o.customer_name} · <a href="tel:${o.customer_phone.replace(/\s/g,'')}" style="text-decoration:underline">${o.customer_phone}</a> · ${new Date(o.created_at*1000).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</p><ul>${o.items.map(it=>`<li>${it.quantity}x ${it.name}</li>`).join('')}</ul><p style="margin-top:8px"><strong>Total : ${eur(o.total_cents)}</strong></p>${o.status==='new'?`<div class="krow"><button class="btn accept" data-act="accept" data-id="${o.id}">✔ Accepter</button><button class="btn refuse" data-act="refuse" data-id="${o.id}">✖ Refuser</button></div><a class="wa" href="${waLink(o)}" target="_blank" rel="noopener">📲 Recevoir sur WhatsApp</a>`:''}</div>`).join('');
-      }catch(e){box.innerHTML='<p class="note">Connexion cuisine impossible — vérifiez que le serveur tourne.</p>'}
-    }
-    document.querySelector('#kitchenOrders').addEventListener('click',async e=>{
-      const b=e.target.closest('button[data-act]');if(!b)return;
-      b.disabled=true;
-      try{await fetch(`${BACKEND_URL}/api/orders/${encodeURIComponent(b.dataset.id)}/${b.dataset.act}`,{method:'POST'})}catch(err){}
-      knownDone.add(b.dataset.id);
-      await pollKitchen();
-      try{const r=await fetch(`${BACKEND_URL}/api/orders`);const os=await r.json();if(!os.some(o=>o.status==='new'))stopSiren()}catch(err){}
-    });
-    document.querySelector('#survBtn').addEventListener('click',()=>{
-      survOn=!survOn;
-      document.querySelector('#survBtn').textContent=survOn?'🔕 Couper la surveillance':'🔔 Activer la surveillance (son)';
-      document.querySelector('#survDot').classList.toggle('on',survOn);
-      document.querySelector('#survLabel').textContent=survOn?'surveillance ACTIVE — laissez cet écran ouvert':'surveillance coupée';
-      if(survOn){ensureAudio();pollKitchen()}
-      else{stopSiren()}
-    });
-    // Affichage auto des commandes (sans son) + rafraîchi toutes les 5 s
-    pollKitchen();setInterval(pollKitchen,5000);
     renderCart();
   </script>
 </body>

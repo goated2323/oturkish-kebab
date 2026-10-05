@@ -75,6 +75,58 @@ fn now_secs() -> u64 {
         .unwrap_or(0)
 }
 
+fn eur(cents: i64) -> String {
+    format!("{:.2} €", cents as f64 / 100.0).replace('.', ",")
+}
+
+fn format_kitchen_call(order: &Order) -> String {
+    let mut s = format!("Nouvelle commande {}. ", order.id);
+    for it in &order.items {
+        s.push_str(&format!("{} fois {}. ", it.quantity, it.name));
+    }
+    s.push_str(&format!(
+        "Total {}. Client {} telephone {}. ",
+        eur(order.total_cents),
+        order.customer_name,
+        order.customer_phone
+    ));
+    s.push_str("Validez la commande sur la page cuisine.");
+    s
+}
+
+// Appel vocal automatique vers la cuisine (CallMeBot, non bloquant).
+// Config: CALLMEBOT_TG_USER=@pseudo_telegram (compte autorisé auprès du bot),
+//         CALLMEBOT_LANG (défaut fr-FR-Standard-A), CALLMEBOT_RPT (défaut 2).
+fn kitchen_call(order: &Order) {
+    let user = env::var("CALLMEBOT_TG_USER").unwrap_or_default();
+    if user.trim().is_empty() {
+        tracing::info!("Appel cuisine non configuré (CALLMEBOT_TG_USER vide)");
+        return;
+    }
+    let lang = env::var("CALLMEBOT_LANG").unwrap_or_else(|_| "fr-FR-Standard-A".into());
+    let rpt = env::var("CALLMEBOT_RPT").unwrap_or_else(|_| "2".into());
+    let msg = format_kitchen_call(order);
+    let id = order.id.clone();
+    tokio::spawn(async move {
+        let client = reqwest::Client::new();
+        let res = client
+            .get("https://api.callmebot.com/start.php")
+            .query(&[
+                ("user", user.as_str()),
+                ("text", msg.as_str()),
+                ("lang", lang.as_str()),
+                ("rpt", rpt.as_str()),
+            ])
+            .timeout(std::time::Duration::from_secs(30))
+            .send()
+            .await;
+        match res {
+            Ok(r) => tracing::info!("Appel cuisine {}: HTTP {}", id, r.status()),
+            Err(e) => tracing::warn!("Appel cuisine {} échoué: {}", id, e),
+        }
+    });
+}
+
 async fn create_order(
     State(state): State<AppState>,
     Json(payload): Json<CreateOrderRequest>,
@@ -123,6 +175,8 @@ async fn create_order(
     };
     s.orders.insert(id.clone(), order.clone());
     tracing::info!("Nouvelle commande {} ({} articles, {} cts)", id, order.items.len(), total);
+    drop(s);
+    kitchen_call(&order);
     (
         StatusCode::CREATED,
         Json(serde_json::json!({"id": id, "order": order})),
