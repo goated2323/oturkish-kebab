@@ -1,12 +1,19 @@
 use axum::{
-    extract::Json,
+    extract::{Json, Path, State},
     http::{HeaderMap, StatusCode},
     response::{Html, IntoResponse},
     routing::{get, post},
     Router,
 };
 use serde::{Deserialize, Serialize};
-use std::{env, net::SocketAddr, path::PathBuf};
+use std::{
+    collections::HashMap,
+    env,
+    net::SocketAddr,
+    path::PathBuf,
+    sync::{Arc, Mutex},
+    time::{SystemTime, UNIX_EPOCH},
+};
 use tower_http::{cors::CorsLayer, services::ServeDir, trace::TraceLayer};
 use tracing_subscriber::EnvFilter;
 
@@ -27,6 +34,135 @@ struct CheckoutRequest {
 struct CheckoutResponse {
     url: Option<String>,
     error: Option<String>,
+}
+
+// ===== COMMANDES EN COURS (cuisine) =====
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct OrderItem {
+    name: String,
+    unit_amount: i64,
+    quantity: u32,
+}
+
+#[derive(Debug, Clone, Serialize)]
+struct Order {
+    id: String,
+    items: Vec<OrderItem>,
+    total_cents: i64,
+    customer_name: String,
+    customer_phone: String,
+    status: String, // new | accepted | refused
+    created_at: u64,
+}
+
+#[derive(Debug, Deserialize)]
+struct CreateOrderRequest {
+    items: Vec<OrderItem>,
+    customer_name: String,
+    customer_phone: String,
+}
+
+struct ShopState {
+    orders: HashMap<String, Order>,
+    next_id: u64,
+}
+type AppState = Arc<Mutex<ShopState>>;
+
+fn now_secs() -> u64 {
+    SystemTime::now()
+        .duration_since(UNIX_EPOCH)
+        .map(|d| d.as_secs())
+        .unwrap_or(0)
+}
+
+async fn create_order(
+    State(state): State<AppState>,
+    Json(payload): Json<CreateOrderRequest>,
+) -> impl IntoResponse {
+    if payload.items.is_empty() {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(serde_json::json!({"error": "Panier vide"})),
+        );
+    }
+    let name = payload.customer_name.trim().to_string();
+    let phone = payload.customer_phone.trim().to_string();
+    if name.is_empty() || name.len() > 80 {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(serde_json::json!({"error": "Nom invalide"})),
+        );
+    }
+    if phone.len() < 6 || phone.len() > 20 {
+        return (
+            StatusCode::BAD_REQUEST,
+            Json(serde_json::json!({"error": "Téléphone invalide"})),
+        );
+    }
+    let mut total: i64 = 0;
+    for it in &payload.items {
+        if it.quantity == 0 || it.unit_amount <= 0 || it.name.trim().is_empty() || it.name.len() > 120 {
+            return (
+                StatusCode::BAD_REQUEST,
+                Json(serde_json::json!({"error": "Article invalide"})),
+            );
+        }
+        total += it.unit_amount * (it.quantity as i64);
+    }
+    let mut s = state.lock().unwrap();
+    let id = format!("OTK-{}", s.next_id);
+    s.next_id += 1;
+    let order = Order {
+        id: id.clone(),
+        items: payload.items,
+        total_cents: total,
+        customer_name: name,
+        customer_phone: phone,
+        status: "new".into(),
+        created_at: now_secs(),
+    };
+    s.orders.insert(id.clone(), order.clone());
+    tracing::info!("Nouvelle commande {} ({} articles, {} cts)", id, order.items.len(), total);
+    (
+        StatusCode::CREATED,
+        Json(serde_json::json!({"id": id, "order": order})),
+    )
+}
+
+async fn list_orders(State(state): State<AppState>) -> impl IntoResponse {
+    let s = state.lock().unwrap();
+    let mut v: Vec<Order> = s.orders.values().cloned().collect();
+    v.sort_by(|a, b| b.created_at.cmp(&a.created_at).then(b.id.cmp(&a.id)));
+    Json(v)
+}
+
+fn transition(state: &AppState, id: &str, to: &str) -> (StatusCode, Json<serde_json::Value>) {
+    let mut s = state.lock().unwrap();
+    match s.orders.get_mut(id) {
+        Some(o) => {
+            if o.status != "new" {
+                return (
+                    StatusCode::CONFLICT,
+                    Json(serde_json::json!({"error": "Commande déjà traitée"})),
+                );
+            }
+            o.status = to.to_string();
+            tracing::info!("Commande {} -> {}", id, to);
+            (StatusCode::OK, Json(serde_json::json!({"ok": true, "order": o.clone()})))
+        }
+        None => (
+            StatusCode::NOT_FOUND,
+            Json(serde_json::json!({"error": "Commande introuvable"})),
+        ),
+    }
+}
+
+async fn accept_order(State(state): State<AppState>, Path(id): Path<String>) -> impl IntoResponse {
+    transition(&state, &id, "accepted")
+}
+
+async fn refuse_order(State(state): State<AppState>, Path(id): Path<String>) -> impl IntoResponse {
+    transition(&state, &id, "refused")
 }
 
 async fn health() -> impl IntoResponse {
@@ -191,10 +327,16 @@ async fn main() {
         tracing::warn!("index.html introuvable dans {}", static_path.display());
     }
 
+    let state: AppState = Arc::new(Mutex::new(ShopState { orders: HashMap::new(), next_id: 1 }));
+
     let api = Router::new()
         .route("/health", get(health))
         .route("/config", get(config))
-        .route("/checkout", post(create_checkout));
+        .route("/checkout", post(create_checkout))
+        .route("/orders", post(create_order).get(list_orders))
+        .route("/orders/:id/accept", post(accept_order))
+        .route("/orders/:id/refuse", post(refuse_order))
+        .with_state(state);
 
     let static_for_fallback = static_path.clone();
     let fallback = ServeDir::new(&static_path)

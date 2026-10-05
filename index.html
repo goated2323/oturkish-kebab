@@ -6,9 +6,12 @@
   <meta name="description" content="O'Turkish Kebab, 28 rue François Mauriac, Marseille 10e. Sandwiches, tacos, burgers, tex mex et box à emporter ou en livraison.">
   <title>O'Turkish Kebab | Marseille 10e</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2216%22 fill=%22%23111%22/><text x=%2250%22 y=%2268%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23fff%22>🥙</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{--black:#111;--white:#fff;--grey:#666;--light-grey:#888;--line:#e5e5e5;--bg:#fafafa}
-    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--white);color:var(--black);font:16px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{font-weight:600;letter-spacing:-.02em}
+    :root{--black:#111;--white:#fff;--grey:#666;--light-grey:#888;--line:#e5e5e5;--bg:#fafafa;--accent:#b3541e;--accent-soft:#fdf3ec;--green:#157f3d;--red:#c22e2e;--font-display:'Fraunces',Georgia,'Times New Roman',serif;--font-body:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}body{margin:0;background:var(--white);color:var(--black);font:16px/1.6 var(--font-body);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;text-rendering:optimizeLegibility;-webkit-tap-highlight-color:transparent}a{color:inherit;text-decoration:none}button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}h1,h2,h3,p{margin:0}h1,h2,h3{font-family:var(--font-display);font-weight:600;letter-spacing:-.01em}
     .wrap{width:min(1060px,calc(100% - 32px));margin:auto}@media(min-width:768px){.wrap{width:min(1060px,calc(100% - 48px))}}
     .notice{text-align:center;padding:9px 12px;background:var(--black);color:var(--white);font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;line-height:1.4}@media(min-width:768px){.notice{padding:10px 16px;font-size:11px}}
     header{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.96);border-bottom:1px solid var(--line);backdrop-filter:saturate(1.4) blur(10px);-webkit-backdrop-filter:saturate(1.4) blur(10px)}
@@ -51,7 +54,48 @@
     .drawer-body{flex:1;overflow:auto;padding:4px 16px}@media(min-width:768px){.drawer-body{padding:6px 22px}}.ditem{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line)}@media(min-width:768px){.ditem{gap:14px;padding:14px 0}}.ditem strong{font-size:13px;font-weight:600}@media(min-width:768px){.ditem strong{font-size:14px}}.ditem .unit{display:block;margin-top:4px;color:var(--light-grey);font-size:12px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
     .mini{width:28px;height:28px;border:1px solid var(--line);border-radius:2px;background:none;cursor:pointer;line-height:1;font-size:13px;display:inline-grid;place-items:center;transition:border-color 150ms ease,background 150ms ease;touch-action:manipulation}@media(min-width:768px){.mini{width:22px;height:22px}}.mini:hover{border-color:var(--black)}.mini:active{background:var(--black);color:var(--white)}
     .empty{color:var(--light-grey);font-size:13px;text-align:center;padding:32px 0}.drawer-foot{padding:16px;border-top:1px solid var(--line);background:var(--white)}@media(min-width:768px){.drawer-foot{padding:20px 22px}}.total{display:flex;justify-content:space-between;align-items:center;font-size:15px;font-weight:600;margin-bottom:12px}@media(min-width:768px){.total{margin-bottom:14px}}.pay{width:100%;min-height:46px}.pay:disabled{opacity:.35;cursor:not-allowed}.note{margin-top:10px;color:var(--light-grey);font-size:11px;text-align:center;line-height:1.5}
-    footer{padding:24px 0;border-top:1px solid var(--line)}@media(min-width:768px){footer{padding:34px 0}}.footer{display:flex;flex-direction:column;gap:12px;color:var(--light-grey);font-size:11px;line-height:1.5}@media(min-width:600px){.footer{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;font-size:12px}}.footer strong{color:var(--black)}.fine{max-width:58ch;order:2}@media(min-width:600px){.fine{order:0}}
+    footer{padding:24px 0;border-top:1px solid var(--line)}@media(min-width:768px){footer{padding:34px 0}}.footer{display:flex;flex-direction:column;gap:12px;color:var(--light-grey);font-size:11px;line-height:1.5}@media(min-width:600px){.footer{flex-direction:row;align-items:center;justify-content:space-between;gap:24px;font-size:12px}}    .footer strong{color:var(--black)}.fine{max-width:58ch;order:2}@media(min-width:600px){.fine{order:0}}
+    /* ===== Relooking pro : hero, cartes, commandes ===== */
+    .hero{background:radial-gradient(1100px 320px at 85% -60px,var(--accent-soft),transparent 60%)}
+    .hero h1{font-size:clamp(2.1rem,8vw,4.4rem);line-height:1.02}
+    .eyebrow{color:var(--accent);font-weight:700}
+    .kicker{color:var(--accent);font-weight:700}
+    .brand{font-family:var(--font-display);font-size:19px}
+    .item{background:var(--white);border:1px solid var(--line);border-radius:12px;padding:14px 16px;margin-bottom:12px;transition:box-shadow 150ms ease,transform 150ms ease}
+    .item:hover{box-shadow:0 6px 22px rgba(0,0,0,.07)}
+    .item h3{font-size:16px}@media(min-width:768px){.item h3{font-size:17px}}
+    .item-thumb{border-radius:8px}
+    .btn{border-radius:8px}
+    .phone,.cart-toggle,.add,.mini{border-radius:8px}
+    .visit-card{border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.05)}
+    .drawer{box-shadow:-12px 0 40px rgba(0,0,0,.12)}
+    .cust{margin-top:12px;display:grid;gap:8px}
+    .cust label{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--light-grey)}
+    .cust input{width:100%;min-height:44px;padding:0 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;background:var(--bg)}
+    .cust input:focus{outline:2px solid var(--black);background:var(--white)}
+    .track{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+    .track input{flex:1 1 180px;min-height:46px;padding:0 14px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px;text-transform:uppercase}
+    .pill{display:inline-block;padding:3px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .pill.new{background:#fff4e0;color:#9a5b00;border:1px solid #f0d48a}
+    .pill.accepted{background:#e6f6ec;color:var(--green);border:1px solid #9ed9b4}
+    .pill.refused{background:#fdeaea;color:var(--red);border:1px solid #f3b0b0}
+    .kcard{border:1px solid var(--line);border-radius:12px;padding:18px;margin-top:14px;background:var(--white);box-shadow:0 8px 26px rgba(0,0,0,.06)}
+    .kcard.flash{border-color:var(--red);animation:kflash 1s ease infinite}
+    @keyframes kflash{0%,100%{box-shadow:0 0 0 0 rgba(194,46,46,.0)}50%{box-shadow:0 0 0 6px rgba(194,46,46,.25)}}
+    .kcard h3{font-size:20px}
+    .kcard ul{margin:10px 0 0;padding-left:20px;color:var(--grey);font-size:14px}
+    .krow{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .btn.accept{background:var(--green);border-color:var(--green);color:#fff;flex:1}
+    .btn.accept:hover{background:#fff;color:var(--green)}
+    .btn.refuse{background:#fff;border-color:var(--red);color:var(--red);flex:1}
+    .btn.refuse:hover{background:var(--red);color:#fff}
+    .btn.big{min-height:56px;font-size:14px;width:100%}
+    .wa{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1faa55;border:1px solid #1faa55;color:#fff;border-radius:8px;min-height:48px;padding:0 18px;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase;width:100%;margin-top:10px}
+    .wa:hover{background:#fff;color:#1faa55}
+    body.alarm{background:#fff1f1}
+    .surv{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+    .dot{width:10px;height:10px;border-radius:50%;background:#ccc;display:inline-block}
+    .dot.on{background:var(--green);animation:kflash 1.2s ease infinite}
     @media(max-width:899px){
       .navlinks{
         display:flex;position:fixed;left:0;right:0;top:58px;flex-direction:column;gap:0;padding:8px 16px 16px;border-bottom:1px solid var(--line);background:rgba(255,255,255,.98);backdrop-filter:saturate(1.4) blur(12px);-webkit-backdrop-filter:saturate(1.4) blur(12px);
@@ -70,12 +114,22 @@
 </head>
 <body>
   <div class="notice">ouvert 7j/7 · 11h à minuit · livraison à partir de 15€</div>
-  <header><div class="wrap nav"><a class="brand" href="#accueil" aria-label="O'Turkish Kebab"><span>O'Turkish<small>Kebab · Marseille 10e</small></span></a><nav class="navlinks" id="navlinks"><a href="#menu">La carte</a><a href="#maison">L’esprit maison</a><a href="#venir">Nous trouver</a></nav><div class="nav-actions"><a class="call" href="tel:0769715620">Commander ↗</a><button class="cart-toggle" id="cartToggle" aria-label="Ouvrir le panier">Panier <span class="badge" id="cartCount">0</span></button><button class="toggle" id="toggle" aria-label="Ouvrir la navigation" aria-expanded="false">☰</button></div></div></header>
+  <header><div class="wrap nav"><a class="brand" href="#accueil" aria-label="O'Turkish Kebab"><span>O'Turkish<small>Kebab · Marseille 10e</small></span></a><nav class="navlinks" id="navlinks"><a href="#menu">La carte</a><a href="#maison">L’esprit maison</a><a href="#venir">Nous trouver</a><a href="#commandes">Commandes en cours</a></nav><div class="nav-actions"><a class="call" href="tel:0769715620">Commander ↗</a><button class="cart-toggle" id="cartToggle" aria-label="Ouvrir le panier">Panier <span class="badge" id="cartCount">0</span></button><button class="toggle" id="toggle" aria-label="Ouvrir la navigation" aria-expanded="false">☰</button></div></div></header>
   <main id="accueil">
     <section class="wrap hero"><div class="eyebrow">street food · grillades · Marseille 10e</div><h1>Le kebab qui met tout le monde d’accord.</h1><p class="lead">Chez O'Turkish, on vient pour un sandwich bien chargé, on reste pour les frites. Kebab, tacos, burgers, tex mex et box à partager, servis sur place, à emporter ou en livraison.</p><div class="actions"><a class="btn primary" href="#menu">Voir la carte ↗</a><a class="btn outline" href="tel:0769715620">Appeler maintenant</a></div><div class="availability"><strong>Ouvert tous les jours</strong>, de 11h à minuit</div></section>
     <section id="menu" class="wrap"><div class="head"><div class="kicker">01 · La carte</div><h2>Choisis ton terrain de jeu.</h2><p class="intro">Les menus incluent frites et boisson quand indiqué.</p></div><div class="tabs" role="tablist" aria-label="Catégories du menu"><button class="tab" role="tab" aria-selected="true" data-cat="sandwiches">Sandwiches</button><button class="tab" role="tab" aria-selected="false" data-cat="tacos">Tacos</button><button class="tab" role="tab" aria-selected="false" data-cat="burgers">Burgers</button><button class="tab" role="tab" aria-selected="false" data-cat="texmex">Tex Mex</button><button class="tab" role="tab" aria-selected="false" data-cat="extras">Extras</button><button class="tab" role="tab" aria-selected="false" data-cat="boissons">Boissons</button></div><div class="menu" id="menuGrid"></div></section>
     <section id="maison" class="feature"><div class="wrap feature-layout"><div><div class="kicker">02 · L’esprit maison</div><h2 style="margin-top:12px;font-size:clamp(1.7rem,3.4vw,2.5rem);line-height:1.1">Simple, généreux,<br>sans détour.</h2></div><div><div class="feature-copy"><p>O'Turkish, c’est l’adresse du 10e pour manger vite sans manger triste. Une carte large, des portions généreuses et les classiques qui font le job, du kebab au tacos triple viande.</p><p>À midi, après le travail ou quand la faim frappe fort, tu sais où aller.</p></div><div class="facts"><div class="fact"><strong>01 · À toute heure</strong><span>Ouvert 7 jours sur 7, de 11h à minuit.</span></div><div class="fact"><strong>02 · Pour chacun</strong><span>Sandwiches, burgers, tacos, pâtes, salades et box.</span></div><div class="fact"><strong>03 · À partager</strong><span>Box étudiant et Box Family pour les grosses faims.</span></div><div class="fact"><strong>04 · En livraison</strong><span>Livraison à partir de 15€, selon zone.</span></div></div></div></div></section>
     <section id="venir" class="wrap"><div class="head"><div class="kicker">03 · En pratique</div><h2>Rendez-vous à la Capelette.</h2></div><div class="visit-card"><h3>O'Turkish Kebab</h3><p>28 rue François Mauriac<br>13010 Marseille</p><div class="contact-grid"><div class="contact"><label>Horaires</label><strong>7j/7 · 11h à minuit</strong></div><div class="contact"><label>Services</label><strong>Sur place · À emporter</strong></div><div class="contact"><label>Livraison</label><strong>À partir de 15€</strong></div><div class="contact"><label>Commande</label><strong>Par téléphone</strong></div></div><div class="phones"><a class="phone" href="tel:0769715620">07 69 71 56 20</a><a class="phone" href="tel:0988353908">09 88 35 39 08</a><a class="phone" href="https://www.google.com/maps/search/?api=1&query=28+rue+Fran%C3%A7ois+Mauriac%2C+13010+Marseille" target="_blank" rel="noopener">Itinéraire ↗</a></div></div></section>
+    <section id="commandes" class="wrap"><div class="head"><div class="kicker">04 · Commandes en cours</div><h2>Suivez votre commande en direct.</h2><p class="intro">Entrez votre numéro de commande (reçu après paiement) pour voir son statut : en préparation, acceptée ou refusée.</p></div>
+      <div class="visit-card"><h3>Suivi client</h3><p>Exemple : OTK-3</p>
+        <div class="track"><input id="trackId" placeholder="OTK-..." autocomplete="off"><button class="btn primary" id="trackBtn">Suivre ma commande</button></div>
+        <div id="trackResult" style="margin-top:14px"></div>
+      </div>
+      <div class="visit-card" style="margin-top:20px"><h3>🔔 Espace cuisine <span class="pill new">réservé au restaurant</span></h3><p>Activez la surveillance sur l'écran du comptoir : chaque nouvelle commande déclenche une <strong>alarme forte en boucle</strong> jusqu'à Acceptation ou Refus.</p>
+        <div class="surv"><button class="btn primary big" id="survBtn" style="max-width:340px">🔔 Activer la surveillance</button><span><span class="dot" id="survDot"></span> <span id="survLabel">surveillance coupée</span></span></div>
+        <div id="kitchenOrders"></div>
+      </div>
+    </section>
   </main>
   <footer><div class="wrap footer"><strong>O'Turkish Kebab</strong><div class="fine">28 rue François Mauriac, 13010 Marseille · 7j/7 · 11h–00h</div><span>Marseille</span></div></footer>
   <div class="backdrop" id="backdrop"></div>
@@ -84,7 +138,8 @@
     <div class="drawer-body" id="cartBody"></div>
     <div class="drawer-foot">
       <div class="total"><span>Total</span><span id="cartTotal">0,00 €</span></div>
-      <button class="btn primary pay" id="payBtn" disabled>Payer par carte (Stripe)</button>
+      <div class="cust"><div><label for="custName">Votre nom</label><input id="custName" placeholder="Ex : Karim" autocomplete="name"></div><div><label for="custPhone">Votre téléphone</label><input id="custPhone" placeholder="Ex : 0612345678" inputmode="tel" autocomplete="tel"></div></div>
+      <button class="btn primary pay" id="payBtn" disabled style="margin-top:12px">Payer par carte (Stripe)</button>
       <div id="paypalWrap" style="margin-top:10px;display:none"><div id="paypalButtons"></div></div>
       <a class="btn outline" href="tel:0769715620" style="width:100%;margin-top:10px"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Commander par téléphone</a>
       <p class="note" id="payNote">Paiement sécurisé · carte via Stripe, ou PayPal · à emporter ou en livraison</p>
@@ -143,6 +198,13 @@
     const cartTotalEuros=()=>{let t=0;for(const k of Object.keys(cart)){t+=cart[k].qty*unitPrice(cart[k].p)}return Math.round(t*100)/100};
     async function checkout(){
       const names=Object.keys(cart);if(!names.length)return;
+      const custName=document.querySelector('#custName').value.trim();
+      const custPhone=document.querySelector('#custPhone').value.trim().replace(/[\s.]/g,'');
+      if(!custName){payNote.textContent='Indiquez votre nom pour commander.';document.querySelector('#custName').focus();return}
+      if(!/^[+\d][\d]{5,19}$/.test(custPhone)){payNote.textContent='Numéro de téléphone invalide.';document.querySelector('#custPhone').focus();return}
+      const pendingItems=names.map(k=>({name:k,unit_amount:Math.round(unitPrice(cart[k].p)*100),quantity:cart[k].qty})).filter(it=>it.unit_amount>0);
+      if(!pendingItems.length){payNote.textContent='Prix invalide.';return}
+      try{sessionStorage.setItem('otk-pending',JSON.stringify({items:pendingItems,customer_name:custName,customer_phone:custPhone}))}catch(e){}
       const tryLegacy=()=>{
         if(names.length===1&&STRIPE_LINKS[names[0]]){window.location.href=STRIPE_LINKS[names[0]]+'?quantity='+cart[names[0]].qty;return true}
         return false;
@@ -170,7 +232,7 @@
     payBtn.addEventListener('click',checkout);
     (function handleReturn(){
       const p=new URLSearchParams(location.search);
-      if(p.has('success')){payNote.innerHTML='✅ Paiement réussi ! Merci pour votre commande.';cart={};renderCart()}
+      if(p.has('success')){confirmOrder();cart={};renderCart()}
       else if(p.has('canceled')) payNote.textContent='Paiement annulé. Vous pouvez réessayer.';
       if(p.has('success')||p.has('canceled')) history.replaceState({},'',location.pathname+location.hash);
     })();
@@ -203,6 +265,78 @@
       };
       document.head.appendChild(s);
     })();
+    // ===== COMMANDES : envoi cuisine + suivi + alarme =====
+    const WA_NUMBER="33769715620";
+    const eur=c=>(c/100).toFixed(2).replace('.',',')+' €';
+    const STATUS_FR={new:'🟡 En cuisine — en attente de validation',accepted:'🟢 Acceptée — en préparation !',refused:'🔴 Refusée — appelez-nous au 07 69 71 56 20'};
+    function waLink(order){
+      const lines=['🧾 NOUVELLE COMMANDE '+order.id,'----------------------'];
+      order.items.forEach(it=>lines.push(`• ${it.quantity}x ${it.name} — ${eur(it.unit_amount*it.quantity)}`));
+      lines.push('----------------------','Total : '+eur(order.total_cents),'Nom : '+order.customer_name,'Tél : '+order.customer_phone);
+      return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(lines.join('\n'))}`;
+    }
+    async function confirmOrder(){
+      let pending=null;try{pending=JSON.parse(sessionStorage.getItem('otk-pending'))}catch(e){}
+      if(!pending||!pending.items||!pending.items.length){payNote.innerHTML='✅ Paiement réussi ! Merci pour votre commande.';return}
+      try{
+        const res=await fetch(`${BACKEND_URL}/api/orders`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(pending)});
+        const data=await res.json().catch(()=>({}));
+        if(!res.ok) throw new Error(data.error||('Erreur '+res.status));
+        try{sessionStorage.removeItem('otk-pending');localStorage.setItem('otk-last-order',data.id)}catch(e){}
+        setDrawer(true);
+        payNote.innerHTML=`✅ Paiement réussi ! Commande <strong>${data.id}</strong> envoyée en cuisine.<br><a href="#commandes" style="text-decoration:underline">Suivre ma commande ↗</a><a class="wa" href="${waLink(data.order)}" target="_blank" rel="noopener">📲 Envoyer sur WhatsApp</a>`;
+      }catch(e){
+        payNote.innerHTML=`✅ Paiement réussi, mais envoi en cuisine impossible (${e.message}).<br><a href="tel:0769715620" style="text-decoration:underline">Appelez-nous pour confirmer ↗</a>`;
+      }
+    }
+    // ===== SUIVI CLIENT =====
+    document.querySelector('#trackBtn').addEventListener('click',async()=>{
+      const id=document.querySelector('#trackId').value.trim().toUpperCase();
+      const box=document.querySelector('#trackResult');
+      if(!id){box.innerHTML='<p class="note">Entrez votre numéro de commande.</p>';return}
+      box.innerHTML='<p class="note">Recherche...</p>';
+      try{
+        const r=await fetch(`${BACKEND_URL}/api/orders`);const orders=await r.json();
+        const o=orders.find(x=>x.id.toUpperCase()===id);
+        if(!o){box.innerHTML='<p class="note">Commande introuvable. Vérifiez le numéro.</p>';return}
+        const lbl=o.status==='new'?'En cours':o.status==='accepted'?'Acceptée':'Refusée';
+        box.innerHTML=`<div class="kcard"><h3>${o.id} <span class="pill ${o.status}">${lbl}</span></h3><p style="margin-top:8px;font-size:15px;font-weight:700">${STATUS_FR[o.status]||o.status}</p><ul>${o.items.map(it=>`<li>${it.quantity}x ${it.name}</li>`).join('')}</ul><p style="margin-top:8px"><strong>Total : ${eur(o.total_cents)}</strong></p></div>`;
+      }catch(e){box.innerHTML='<p class="note">Suivi indisponible pour le moment.</p>'}
+    });
+    try{const last=localStorage.getItem('otk-last-order');if(last)document.querySelector('#trackId').value=last}catch(e){}
+    // ===== CUISINE : surveillance + alarme forte en boucle =====
+    let survOn=false,survTimer=null,knownDone=new Set(),audioCtx=null,sirenTimer=null,sirenOn=false;
+    function ensureAudio(){if(!audioCtx){try{audioCtx=new (window.AudioContext||window.webkitAudioContext)()}catch(e){}}if(audioCtx&&audioCtx.state==='suspended')audioCtx.resume()}
+    function beep(freq,dur){if(!audioCtx)return;try{const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='square';o.frequency.value=freq;g.gain.setValueAtTime(0.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(0.5,audioCtx.currentTime+0.02);g.gain.exponentialRampToValueAtTime(0.0001,audioCtx.currentTime+dur);o.connect(g);g.connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+dur+0.05)}catch(e){}}
+    function startSiren(){if(sirenOn||!audioCtx)return;sirenOn=true;document.body.classList.add('alarm');let hi=false;sirenTimer=setInterval(()=>{beep(hi?880:620,0.35);hi=!hi;try{if(navigator.vibrate)navigator.vibrate(400)}catch(e){}},700)}
+    function stopSiren(){sirenOn=false;clearInterval(sirenTimer);document.body.classList.remove('alarm')}
+    async function pollKitchen(){
+      const box=document.querySelector('#kitchenOrders');
+      try{
+        const r=await fetch(`${BACKEND_URL}/api/orders`);const orders=await r.json();
+        const news=orders.filter(o=>o.status==='new');
+        if(news.length&&survOn){ensureAudio();startSiren()}
+        if(!news.length&&sirenOn)stopSiren();
+        if(!orders.length){box.innerHTML='<p class="empty">Aucune commande pour le moment.</p>';return}
+        box.innerHTML=orders.slice(0,12).map(o=>`<div class="kcard${o.status==='new'?' flash':''}"><h3>${o.id} <span class="pill ${o.status}">${o.status==='new'?'Nouvelle':o.status==='accepted'?'Acceptée':'Refusée'}</span></h3><p style="color:var(--grey);font-size:13px;margin-top:4px">${o.customer_name} · <a href="tel:${o.customer_phone.replace(/\s/g,'')}" style="text-decoration:underline">${o.customer_phone}</a> · ${new Date(o.created_at*1000).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}</p><ul>${o.items.map(it=>`<li>${it.quantity}x ${it.name}</li>`).join('')}</ul><p style="margin-top:8px"><strong>Total : ${eur(o.total_cents)}</strong></p>${o.status==='new'?`<div class="krow"><button class="btn accept" data-act="accept" data-id="${o.id}">✔ Accepter</button><button class="btn refuse" data-act="refuse" data-id="${o.id}">✖ Refuser</button></div><a class="wa" href="${waLink(o)}" target="_blank" rel="noopener">📲 Recevoir sur WhatsApp</a>`:''}</div>`).join('');
+      }catch(e){box.innerHTML='<p class="note">Connexion cuisine impossible — vérifiez que le serveur tourne.</p>'}
+    }
+    document.querySelector('#kitchenOrders').addEventListener('click',async e=>{
+      const b=e.target.closest('button[data-act]');if(!b)return;
+      b.disabled=true;
+      try{await fetch(`${BACKEND_URL}/api/orders/${encodeURIComponent(b.dataset.id)}/${b.dataset.act}`,{method:'POST'})}catch(err){}
+      knownDone.add(b.dataset.id);
+      await pollKitchen();
+      try{const r=await fetch(`${BACKEND_URL}/api/orders`);const os=await r.json();if(!os.some(o=>o.status==='new'))stopSiren()}catch(err){}
+    });
+    document.querySelector('#survBtn').addEventListener('click',()=>{
+      survOn=!survOn;
+      document.querySelector('#survBtn').textContent=survOn?'🔕 Couper la surveillance':'🔔 Activer la surveillance';
+      document.querySelector('#survDot').classList.toggle('on',survOn);
+      document.querySelector('#survLabel').textContent=survOn?'surveillance ACTIVE — laissez cet écran ouvert':'surveillance coupée';
+      if(survOn){ensureAudio();pollKitchen();survTimer=setInterval(pollKitchen,5000)}
+      else{clearInterval(survTimer);stopSiren()}
+    });
     renderCart();
   </script>
 </body>
